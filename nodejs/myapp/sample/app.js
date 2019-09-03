@@ -42,6 +42,8 @@ app.get('/api/v1/list',isAuthenticated, (req, res) => {
 	res.json(todoList);
 })
 
+app.
+
 //local
 passport.use(new LocalStrategy(
     {
