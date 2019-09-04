@@ -1,7 +1,6 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-import { BrowserRouter as Router, Switch, Route, Link, NavLink, withRouter } from 'react-router-dom';
+
+import { BrowserRouter as Router, Switch, Route, NavLink, withRouter } from 'react-router-dom';
 
 import Articles from './Articles';
 
@@ -11,9 +10,11 @@ const Header = ({onClick}) => (
   </h1>
 );
 
+//真ん中の記事リンク
 const Nav = () => (
   <ul className ="nav nav-pills">
-    <li><NavLink exact to="/articles">Articles</NavLink> </li>
+    <li><NavLink exact to="/articles">Articles！</NavLink> </li>
+    <li><NavLink exact to="/articles/favorite">Favorite　Articles</NavLink> </li>
   </ul>
 );
 

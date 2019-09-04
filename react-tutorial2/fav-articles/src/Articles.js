@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom';
 
 import Api from './Api';
 
-import FaStar from 'react-icons/lib/fa/star';
+import { FaStar } from 'react-icons/fa';
 import immutable from 'immutable';
-import { threadId } from 'worker_threads';
 
-const api = new Api(`http://127.0.0.1:4000`);
+const api = new Api(`http://localhost:4000`);
+
 const FavoriteButton = ({isFavorite, onClick} )=> (
     <FaStar style= {{cursor: "pointer"}} color={isFavorite ? "#ffa500":"#eee"} onClick={onClick} />)
 
@@ -18,13 +18,21 @@ class List extends Component {
     }
 
     componentWillMount(){
-        const { id } = this.props.match.params;
-        api.showArticle(parseInt(id, 10)).then((result) => {
-            this.setState({article: result.article})
+        api.listArticles().then((result) => {
+            this.setState({articles: result.articles, current: 1, last: result.links.last_page})
         })
     }
+
+    handleFavorite(article, index) {
+    article.isFavorite = article.isFavorite !== true;
+    api.updateArticle(article.id, article).then((result => {
+        const nextArticles = immutable.List(this.state.articles);
+        nextArticles[index] = result.article;
+        this.setState({articles: nextArticles});
+    }))
+    }
+
     render(){
-        const {article} = this.state;
         return (
             <div>
                 <h2>Articles</h2>
@@ -32,6 +40,9 @@ class List extends Component {
                     {this.state.articles.map((x, index) =>(
                         <li key={index}>
                             <Link to={`/articles/${x.id}`}>{x.title}</Link>
+                            {" "}
+                            <FavoriteButton isFavorite={x.isFavorite} onClick={() =>
+                            this.handleFavorite(x, index)} />
                         </li>
                     ))}
                     
@@ -52,10 +63,25 @@ class FavoriteList extends Component {
 }
 
 class Show extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = { article:{} }
+    }
+
+    componentWillMount() {
+        const {id} = this.props.match.params;
+        api.showArticle(parseInt(id, 10)).then((result) =>{
+            this.setState({article:result.article})
+        })
+    }
+
     render(){
+        const {article} = this.state;
         return (
             <div>
-                <h3>Show {this.props.match.params.id}</h3>
+                <h2>{article.title}</h2>
+                <h3>{article.discription}</h3>
             </div>
         )
     }
