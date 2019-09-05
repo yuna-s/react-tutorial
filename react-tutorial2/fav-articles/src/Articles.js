@@ -35,7 +35,7 @@ class List extends Component {
     render(){
         return (
             <div>
-                <h2>Articles</h2>
+                <h2>Articles neko</h2>
                 <ul>
                     {this.state.articles.map((x, index) =>(
                         <li key={index}>
@@ -56,7 +56,7 @@ class FavoriteList extends Component {
     render() {
         return (
             <div>
-                <h2>Favorite Articles</h2>
+                <h2>Favorite Articles.Articles</h2>
             </div>
         )
     }

@@ -7,7 +7,7 @@
     "bootstrap": "^4.3.1",
     "faker": "^4.1.0",
     "immutable": "^4.0.0-rc.12",
-    "json-server": "^0.15.0",
+    "json-server": "^0.15.1",
     "parse-link-header": "^1.0.1",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
@@ -21,7 +21,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "serve": "node -e \"require('./server').listen(4000)\""
+    "serve": "node -e \"require('./server').listen(4001)\""
   },
   "eslintConfig": {
     "extends": "react-app"

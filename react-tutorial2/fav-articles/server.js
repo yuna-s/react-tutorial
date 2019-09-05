@@ -7,7 +7,7 @@ server.use((req, res, next) => {
   //CORS実現のために、ヘッダーに以下を追加
   //あとで確認
   //HTTP通信を許可するURIを指定
-  res.header("Access-Control-Allow-Origin", "*")
+  res.header("Access-Control-Allow-Origin", "http://localhost:3000")
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
   res.header("Access-Control-Allow-Methods", "GET, POST, PUT, PATCH, DELETE, HEAD, OPTIONS")
   //continue to JSON server router

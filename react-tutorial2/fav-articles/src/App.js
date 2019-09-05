@@ -1,24 +1,35 @@
-import React from 'react';
+//import React,{useState}from 'react';
+import React from 'react'
 
 import { BrowserRouter as Router, Switch, Route, NavLink, withRouter } from 'react-router-dom';
-
 import Articles from './Articles';
+//import { set } from 'immutable';
+
+const header = 'Favorite Articles :)';
+const footer = 'yuna sugimoto';
+const test = 'test';
 
 const Header = ({onClick}) => (
   <h1 className="text-center" style={{ cursor: "pointer" }} onClick={onClick}>
-    Favorite Articles
+    { header }
   </h1>
 );
+const Footer = () => (<p className="text-center"> { footer } </p>);
 
-//真ん中の記事リンク
-const Nav = () => (
-  <ul className ="nav nav-pills">
-    <li><NavLink exact to="/articles">Articles！</NavLink> </li>
-    <li><NavLink exact to="/articles/favorite">Favorite　Articles</NavLink> </li>
+
+
+const Nav = () =>{
+  
+  //const [test,setTest] = useState("test");
+  //setTest({test:"neko"})
+  return(
+    <ul className ="nav nav-pills">
+    <li><NavLink exact to="/articles">{test}</NavLink> </li>
+    <li><NavLink exact to="/article">お気に入り</NavLink> </li>
   </ul>
 );
+}
 
-const Footer = () => (<p className="text-center">Favorite Article</p>);
 
 const Routes = withRouter(({history}) => (
   <div className="container">
@@ -41,3 +52,45 @@ const App = () => (
 )
 
 export default App;
+
+/*
+const test = ()=>{
+  const [test,setTest] = useState("test")
+  const [a,setA] = useState("test")
+  setTest("???")
+  return(
+    <>
+    {test}
+    </>
+  )
+}
+
+const setTest = (test) => {
+  return (test+1)
+}
+class testt {
+  constructor(){
+    this.state ={
+      test : "test",
+      a:"",
+      b:""
+    }
+  }
+  
+  setTest(){
+    setState({
+      ...this.state,
+      test:"???"
+    })
+  }
+
+  render(){
+    return(
+      <>
+      {this.state.test}
+      </>
+    )
+  }
+}
+*/
+//真ん中の記事リンク
