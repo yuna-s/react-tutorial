@@ -1,4 +1,6 @@
 import { IIncident } from "./interfaces";
+import img from "../pic/hato.png";
+
 
 export const TESTDATA = [
     {
@@ -103,4 +105,5 @@ export const TEST_SUPPORT_LIST: IIncident[] = [
 ]
 
 
-export const IMAGESRC = "//ww.namu.la/s/e81e2a83ce2701031c4257dab6bae8308522b5afa8f9c19c560c56ff091be0cc0cebf4968338fdf03ed0c23e224771ee01b4aa644c02cecce10096ed1df52c2943bce3fcf33741829071203dd9f068116f307ade54005bae23dd7e9a1bfddb78";
+//export const IMAGESRC = "//ww.namu.la/s/e81e2a83ce2701031c4257dab6bae8308522b5afa8f9c19c560c56ff091be0cc0cebf4968338fdf03ed0c23e224771ee01b4aa644c02cecce10096ed1df52c2943bce3fcf33741829071203dd9f068116f307ade54005bae23dd7e9a1bfddb78";
+export const IMAGESRC = img;

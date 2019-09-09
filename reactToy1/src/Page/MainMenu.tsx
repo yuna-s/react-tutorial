@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { makeStyles, createStyles, Drawer, TextField, withStyles, Tabs, Tab } from '@material-ui/core';
 import { AllInboxOutlined, AccessTimeOutlined, StarBorderOutlined } from '@material-ui/icons';
 import MenuLayout from './Menus/MenuLayout';
+import onClickOutside from 'react-onclickoutside';
+import { UIContext } from '../Context/UIContext';
 
 const drawerWidth = 240;
 const useStyles = makeStyles(theme => createStyles({
@@ -59,13 +61,19 @@ interface IMenuType {
     }
 }
 
+
+
 const MainMenu: React.FC = () => {
     const classes = useStyles();
     const [selectedTab, setSelect] = useState(0);
+    const {isMenuOpen} = useContext(UIContext)
+
     return (
         <Drawer
             className={classes.drawer}
             variant="permanent"
+            //add here
+            hidden = {!isMenuOpen}
             classes={{
                 paper: classes.drawerPaper
             }}

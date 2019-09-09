@@ -1,11 +1,13 @@
 import React, { createContext, useState } from 'react';
 
 interface IUIContext{
-    isMenuOpen : boolean
+    isMenuOpen : boolean,
+    toggle:()=>void
 }
 
 export const UIContext = createContext<IUIContext>({
-    isMenuOpen : false
+    isMenuOpen : false,
+    toggle:()=>{}
 });
 
 const UIContextProvider :React.FC= (props)=>{
@@ -13,7 +15,8 @@ const UIContextProvider :React.FC= (props)=>{
     return(
         <UIContext.Provider 
             value={{
-                isMenuOpen:isMenuOpen
+                isMenuOpen:isMenuOpen,
+                toggle:()=>{toggleSideMenu(!isMenuOpen)}
             }}
         >
             {props.children}

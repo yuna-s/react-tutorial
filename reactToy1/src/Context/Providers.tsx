@@ -8,3 +8,5 @@ const Providers : React.FC = (props)=>{
         </UIContextProvider>
     );
 }
+
+export default Providers;

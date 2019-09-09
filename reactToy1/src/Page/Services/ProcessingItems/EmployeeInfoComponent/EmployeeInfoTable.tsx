@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Table, TableRow, TableCell, TableBody } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 import { IMAGESRC, TESTDATA } from '../../../../Constance/TestData';
+import { UIContext } from '../../../../Context/UIContext';
 
 
 const useStyles = makeStyles({
@@ -18,6 +19,7 @@ const useStyles = makeStyles({
 const EmployeeInfoTable: React.FC = (props) => {
     const selected = 0;
     const classes = useStyles(props);
+    const {toggle} = useContext(UIContext);
     return (
         <>
             <Table
@@ -35,6 +37,7 @@ const EmployeeInfoTable: React.FC = (props) => {
                         </TableCell>
                         <TableCell rowSpan={5}>
                             <img
+                                onClick={toggle}
                                 style={{
                                     maxWidth: "10vw"
                                 }}
