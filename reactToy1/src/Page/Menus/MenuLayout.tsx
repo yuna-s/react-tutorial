@@ -18,9 +18,7 @@ const MenuLayout: React.FC<IProps> = (props) => {
     return (
         <>
             {/* menu list */}
-            <MenuList
-                className={classes.menu}
-            >
+            <MenuList className={classes.menu}>
                 <MainMenuList />
             </MenuList>
             {/* menu bottom */}
