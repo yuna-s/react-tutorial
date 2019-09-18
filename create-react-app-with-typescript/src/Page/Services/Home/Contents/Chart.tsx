@@ -1,6 +1,6 @@
 import React from 'react';
 import { LineChart, Line, XAxis, YAxis, Label, ResponsiveContainer } from 'recharts';
-import Title from './DashBord/Title';
+import Title from '../../../../Component/Frame/Title';
 
 // Generate Sales Data
 function createData(time: string, amount?: number) {

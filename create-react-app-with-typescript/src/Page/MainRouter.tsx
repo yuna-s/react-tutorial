@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core'
 
 import LogIn from './LogIn'
 import Dashboard from './Dashboard'
+import MainContainer from './MainContainer'
 
 const useStyles = makeStyles({
     root: {
@@ -21,7 +22,7 @@ const MainRouter: React.FC = () => {
                 <Route exact path="/login" component={LogIn} />
                 <Route path="/">
                     <Dashboard />
-                    {/*<MainContainer />*/}
+                    <MainContainer />
                 </Route>
             </Switch>
         </div>
