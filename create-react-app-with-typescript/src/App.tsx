@@ -8,19 +8,6 @@ import ProTip from './ProTip';
 import { BrowserRouter } from 'react-router-dom';
 import MainRouter from './Page/MainRouter';
 
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
-
 export default function App() {
   return (
     <BrowserRouter>

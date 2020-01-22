@@ -23,12 +23,16 @@ app.use(session({
   //未初期化のセッションを保存するか
   saveUninitialized: false,
   //他にもsessionの寿命とか、httpsならsecureも設定できる
+  cookie: {
+    maxAge: 30 * 60 * 1000
+  }
 }));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
-
+// uncomment after placing your favicon in /public
+//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -45,21 +49,49 @@ app.use('/login', loginRouter);
 
 //認証セクション
 var passport = require('passport');
-var OpenidConnectStrategy = require('passport-openidconnect').Strategy;
+//var OpenidConnectStrategy = require('passport-openidconnect').Strategy;
+var saml = require('passport-saml');
+
+
+//saml認証で取得したユーザー情報をシリアライズしてセッションに埋め込み
+//req.userでアクセス可能
+passport.serializeUser(function (user, done) {
+  //userにはprofileが入る
+  done(null, user);
+});
+
+//リクエストに含まれるユーザー情報をでシリアライズ
+passport.deserializeUser(function (obj, done) {
+  done(null, obj);
+});
+
+var samlStrategy = new saml.Strategy({
+  callbackUrl: "http://localhost:3000/login/callback",
+  entryPoint: "http://localhost:8080/openam/SSORedirect/metaAlias/idp",
+  issuer: "http://localhost:3000/",
+  logoutUrl: "https://localhost:8080/openam/IDPSloRedirect/metaAlias/idp"
+}, function (profile, done) {
+  var user = profile;
+  console.log('profile: ', profile);
+  return done(null, user);
+});
+
 
 app.use(passport.initialize());
 app.use(passport.session());
+passport.use(samlStrategy);
 
+/*
 passport.use(new OpenidConnectStrategy({
-  issuer:"http://localhost:8080/openam/oauth2",
+  issuer: "http://localhost:8080/openam/oauth2",
   authorizationURL: "http://localhost:8080/openam/oauth2/authorize",
   tokenURL: "http://localhost:8080/openam/oauth2/access_token",
   userInfoURL: "http://localhost:8080/openam/oauth2/userinfo",
   clientID: "sampleRP",
   clientSecret: "nekoneko",
   callbackURL: "http://localhost:3000/oauth2callback",
-  scope: ["openid", "email", "profile" ]
-}, function(profile, accessToken, refreshToken, done) {
+  scope: ["openid", "email", "profile"]
+}, function (profile, accessToken, refreshToken, done) {
   //認証成功したらここにくる
   //ここでID tokenの検証を行う
   console.log('accessToken: ', accessToken);
@@ -67,33 +99,67 @@ passport.use(new OpenidConnectStrategy({
 
   return done(null, profile);
 }));
+*/
 
-passport.serializeUser(function(user, done){
-  //userにはprofileが入る
-  done(null, user);
-});
-
-passport.deserializeUser(function(obj, done){
-  done(null, obj);
-});
 
 app.get('/auth/openidconnect', passport.authenticate('openidconnect'));
 
 app.get('/oauth2callback', passport.authenticate('openidconnect', {
-    failureRedirect: '/loginfail'
-}), function(req, res) {
-    // Successful authentication, redirect home.
-    res.redirect('/login');
+  failureRedirect: '/loginfail'
+}), function (req, res) {
+  // Successful authentication, redirect home.
+  res.redirect('/login');
 });
+
+// 認証が通れば、/にリダイレクト
+// 認証NGの場合は、認証失敗詳細(failureFlash: true)も含めて/にリダイレクト
+app.get('/auth/saml', passport.authenticate('saml', {
+  failureRedirect: '/',
+  failureFlash: true
+}), function (req, res) {
+  res.redirect('/');
+});
+
+// IdPでのSSOログイン後、コールバックされるURL
+app.post('/login/callback', passport.authenticate('saml', {
+  failureRedirect: '/loginfail',
+  failureFlash: true
+}), function (req, res) {
+  res.redirect('/login');
+});
+
+app.get('/logout', function (req, res) {
+  // samlStrategy.logut uses req.user
+  console.log(req.user);
+
+  // IdPでのSSOログアウトを実施
+  samlStrategy.logout(req, function (err, request) {
+    console.log(err);
+    console.log(request);
+    if (!err) {
+      res.redirect(request);
+    }
+  });
+});
+
+// IdPでのSSOログアウト後、コールバックされるURL
+// アプリケーション(passport)のログアウト処理を実施
+app.get('/logout/callback', function (req, res) {
+  req.logout();
+  res.redirect('/');
+});
+
+
+
 //ここまで
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};

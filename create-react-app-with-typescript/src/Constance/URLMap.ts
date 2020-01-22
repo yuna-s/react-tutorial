@@ -1,32 +1,75 @@
 export const MENU_URLS = [
     {
-        name: "トップページ",
-        URL: "/top",
-        icon: "home"
+        name: "アカウント",
+        URL: "/home",
+        icon: "account"
     },
     {
-        name: "SSOとは",
+        name: "共有アカウント",
         URL: "/docs",
-        icon: "book"
+        icon: "sharedAccount"
 
     },
     {
-        name: "よくある質問",
+        name: "システム権限",
         URL: "/issue",
-        icon: "question"
+        icon: "authority"
+
+    },
+    {
+        name: "申請書",
+        URL: "/issue",
+        icon: "application"
 
     }
 ]
 
-export const SUBMENU_URLS = [
+export const SUBMENU_URLS_MASTER = [
     {
-        name: "SSO連携申請",
+        name: "承認グループ",
         URL: "/apply",
-        icon: "apply"
+        icon: "approval"
     },
     {
-        name: "お問い合わせ",
+        name: "申請グループ",
         URL: "/contact",
-        icon: "contact"
+        icon: "authority"
+    },
+    {
+        name: "システムグループ",
+        URL: "/apply",
+        icon: "system"
+    },
+    {
+        name: "インフォメーション",
+        URL: "/contact",
+        icon: "info"
+    }
+]
+export const SUBMENU_URLS_TOOLS = [
+    {
+        name: "STRAIGHT互換認証API",
+        URL: "/apply",
+        icon: "straightApi"
+    },
+    {
+        name: "管理者機能",
+        URL: "/contact",
+        icon: "settingUsers"
+    }
+]
+export const SUBMENU_URLS = [
+    {
+        name: "マスタ",
+        URL: "/apply",
+        icon: "master",
+        subsubmenu: SUBMENU_URLS_MASTER
+    },
+    {
+        name: "ツール",
+        URL: "/contact",
+        icon: "tools",
+        subsubmenu: SUBMENU_URLS_TOOLS
+
     }
 ]

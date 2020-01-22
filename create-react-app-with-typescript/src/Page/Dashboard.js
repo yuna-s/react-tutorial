@@ -3,10 +3,7 @@ import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Drawer from '@material-ui/core/Drawer';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import List from '@material-ui/core/List';
-import Typography from '@material-ui/core/Typography';
+
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 
@@ -14,6 +11,7 @@ import { MenuList } from '@material-ui/core';
 import MainMenu from './Menu/MainMenu';
 import SubMenu from './Menu/SubMenu';
 import { TextField } from '@material-ui/core'
+import MainContainer from './MainContainer'
 
 import IconCheck from '../Constance/IconCheck'
 import Copyright from '../Constance/Copyright'
@@ -66,6 +64,7 @@ const useStyles = makeStyles(theme => ({
 export default function Dashboard() {
     const classes = useStyles();
     const [open, setOpen] = React.useState(true);
+    const [selectedIndex, setSelectedIndex] = React.useState(1);
     const handleDrawerOpen = () => {
         setOpen(true);
     };

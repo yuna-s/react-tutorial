@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import { AppBar, Toolbar, Typography, makeStyles, IconButton, Badge } from '@material-ui/core';
 
 //constanceの読み込み
-import { drawerWidth } from '../Constance/Value'
+import { drawerWidth, title } from '../Constance/Value'
 import IconCheck from '../Constance/IconCheck'
 
 const useStyles = makeStyles(theme => ({
@@ -60,8 +60,8 @@ const MainHeader: React.FC<{ open: any, handleDrawerOpen: any }> = ({ handleDraw
                     {IconCheck("menu")}
                 </IconButton>
                 <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
-                    SB SSO
-                    </Typography>
+                    {title}
+                </Typography>
                 <IconButton color="inherit">
                     <Badge badgeContent={4} color="secondary">
                         {IconCheck("notification")}
