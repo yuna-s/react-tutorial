@@ -1,0 +1,42 @@
+##
+##   DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
+##
+##   Copyright (c) 2006 Sun Microsystems Inc. All Rights Reserved
+##
+##   The contents of this file are subject to the terms
+##   of the Common Development and Distribution License
+##   (the License). You may not use this file except in
+##   compliance with the License.
+##
+##   You can obtain a copy of the License at
+##   https://opensso.dev.java.net/public/CDDLv1.0.html or
+##   opensso/legal/CDDLv1.0.txt
+##   See the License for the specific language governing
+##   permission and limitations under the License.
+##
+##   When distributing Covered Code, include this CDDL
+##   Header Notice in each file and include the License file
+##   at opensso/legal/CDDLv1.0.txt.
+##   If applicable, add the following below the CDDL Header,
+##   with the fields enclosed by brackets [] replaced by
+##   your own identifying information:
+##   "Portions Copyrighted [year] [name of copyright owner]"
+##
+##   $Id: odsee_userinit.ldif,v 1.1 2009/06/03 19:14:25 goodearth Exp $
+##
+##   Portions Copyrighted 2015 ForgeRock AS.
+##
+dn: ou=people,@userStoreRootSuffix@
+objectClass: top
+objectClass: organizationalUnit
+objectClass: iplanet-am-managed-people-container
+
+dn: ou=groups,@userStoreRootSuffix@
+objectClass: top
+objectClass: organizationalUnit
+objectclass: iplanet-am-managed-group-container
+
+dn:@userStoreRootSuffix@
+changetype:modify
+add:aci
+aci: (targetattr = "objectclass || inetuserstatus || iplanet-am-user-login-status || iplanet-am-web-agent-access-allow-list || iplanet-am-domain-url-access-allow || iplanet-am-web-agent-access-deny-list || iplanet-am-user-account-life || iplanet-am-session-max-session-time || iplanet-am-session-max-idle-time || iplanet-am-session-get-valid-sessions || iplanet-am-session-destroy-sessions || iplanet-am-session-add-session-listener-on-all-sessions || iplanet-am-user-admin-start-dn || iplanet-am-auth-post-login-process-class")(version 3.0; acl "OpenAM User self modification denied"; deny (write) userdn ="ldap:///self";)

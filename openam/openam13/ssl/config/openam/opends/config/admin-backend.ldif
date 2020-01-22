@@ -1,0 +1,47 @@
+dn: cn=admin data
+objectClass: ds-cfg-branch
+objectClass: top
+cn: admin data
+entryUUID: 46e489f6-1f92-3120-990f-54a178e95b21
+
+dn: cn=instance keys,cn=admin data
+objectClass: ds-cfg-branch
+objectClass: top
+cn: instance keys
+entryUUID: 66ceef12-f0d6-355e-9e9b-9bdcfe536d8c
+
+dn: cn=secret keys,cn=admin data
+objectClass: ds-cfg-branch
+objectClass: top
+cn: secret keys
+entryUUID: 26176404-8825-3f77-9efd-c52bd4061f3b
+
+dn: cn=Administrators,cn=admin data
+objectClass: top
+objectClass: groupofurls
+memberURL: ldap:///cn=Administrators,cn=admin data??one?(objectclass=*)
+description: Group of identities which have full access.
+cn: Administrators
+entryUUID: 80faa47a-77d6-3c78-a3c1-ea6ccbd2f735
+
+dn: cn=Server Groups,cn=admin data
+objectClass: ds-cfg-branch
+objectClass: top
+cn: Server Groups
+entryUUID: 9ee2aa25-d738-31fc-9fde-145fe9a53ae0
+
+dn: cn=all-servers,cn=Server Groups,cn=admin data
+objectClass: top
+objectClass: groupOfUniqueNames
+cn: all-servers
+entryUUID: 00450d2d-26b0-3d92-b9e8-f616539697fa
+
+dn: ds-cfg-key-id=7D94DD81AA35CEAFFFA82721202E6794,cn=instance keys,cn=admin data
+objectClass: top
+objectClass: ds-cfg-instance-key
+ds-cfg-public-key-certificate;binary:: MIIC5jCCAc6gAwIBAgIEcEptODANBgkqhkiG9w0BAQUFADA1MR8wHQYDVQQKExZPcGVuREogUlNBIENlcnRpZmljYXRlMRIwEAYDVQQDEwlsb2NhbGhvc3QwHhcNMTkxMjA5MDcwMTI3WhcNMzkxMjA0MDcwMTI3WjA1MR8wHQYDVQQKExZPcGVuREogUlNBIENlcnRpZmljYXRlMRIwEAYDVQQDEwlsb2NhbGhvc3QwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCF5WIpipX2o7rFxzoBLSyIvZnp0RsYHgY75Bc2x2JrcJcWl+aAAJUC+HQPySieC862UCMbKUFekTqqImSZoRLBRYRu+/I8cuQKVTru+WUlZVtl2OdvYB7FwsqkkaSgS05OnZeilas36BIL0T4K2oFhRS+zVvYwd3MTXQfcD5t3IwBS+LYNeXj+RuvR2iPScmR52qugEi6wpfsr24ucQoU/hrCpzTQOCZq2CG/ZOtysZO2e0AKRWi7P4KLb6zffM52nWgrrxI6iH89NVBE9gysqcVkmU6Od1URK3tkGF7f2bonAN9MJtImxf1eMWmiQtFsax7GNyTje7RvRXohsf9w3AgMBAAEwDQYJKoZIhvcNAQEFBQADggEBAFsz9WQrN4cwYoIR2Qob7h0MP7EbfGyoMQOQTR6Mpf6/nOgKXuBj48Nam56efYc/LTfgTbnCrFg65taryM1K1D1/XUiRmnGFArMm1w6edUVJpLm4Ii/+tkT4DkwH9AUA9OWWTcCZqLU1j6RKEShwQ4musVti+ixRTSjz1+CRdlMG7A0IKvNCd3/C0UTZrdi6h++yyCjS8+HrXF5VjDCBX9+DPM9QWURZUsPBEtqW++u0CisQI4re47bO/09y4n2mEc64/Fa1ngIGTa4WcaAQ3/Ej/VhcW7F8vscw4zsPJBuhX58brZ82SAfWuTtY2J6jzbCpTCNwvN1n6KRMcuAtwVA=
+ds-cfg-key-id: 7D94DD81AA35CEAFFFA82721202E6794
+createTimestamp: 20191209070130Z
+creatorsName: cn=Internal Client,cn=Root DNs,cn=config
+entryUUID: efa0aac4-cb39-47fc-953b-8e1b690f6091
+

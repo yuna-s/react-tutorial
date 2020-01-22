@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ServicesConfiguration
+        PUBLIC "=//iPlanet//Service Management Services (SMS) 1.0 DTD//EN"
+        "jar://com/sun/identity/sm/sms.dtd">
+<!--
+/*
+ * The contents of this file are subject to the terms of the Common Development and
+ * Distribution License (the License). You may not use this file except in compliance with the
+ * License.
+ *
+ * You can obtain a copy of the License at legal/CDDLv1.0.txt. See the License for the
+ * specific language governing permission and limitations under the License.
+ *
+ * When distributing Covered Software, include this CDDL Header Notice in each file and include
+ * the License file at legal/CDDLv1.0.txt. If applicable, add the following below the CDDL
+ * Header, with the fields enclosed by brackets [] replaced by your own identifying
+ * information: "Portions Copyrighted [year] [name of copyright owner]".
+ *
+ * Copyright 2015 ForgeRock AS.
+ */
+-->
+
+<ServicesConfiguration>
+    <Service name="UmaProvider" version="1.0">
+        <Schema
+                serviceHierarchy="/DSAMEConfig/umaProviderService"
+                i18nFileName="UmaProvider"
+                revisionNumber="1"
+                i18nKey="forgerock-am-uma-service-description"
+                resourceName="uma">
+            <Organization>
+                <AttributeSchema name="uma-rpt-lifetime"
+                                 type="single"
+                                 syntax="number_range" rangeStart="0" rangeEnd="2147483647"
+                                 validator="RequiredValueValidator"
+                                 i18nKey="a101"
+                                 resourceName="rptLifetime">
+                    <DefaultValues>
+                        <Value>3600</Value>
+                    </DefaultValues>
+                </AttributeSchema>
+
+                <AttributeSchema name="uma-permission-ticket-lifetime"
+                                 type="single"
+                                 syntax="number_range" rangeStart="0" rangeEnd="2147483647"
+                                 validator="RequiredValueValidator"
+                                 i18nKey="a102"
+                                 resourceName="permissionTicketLifetime">
+                    <DefaultValues>
+                        <Value>120</Value>
+                    </DefaultValues>
+                </AttributeSchema>
+
+                <AttributeSchema name="uma-delete-policies-on-resource-server-deletion"
+                                 type="single"
+                                 syntax="boolean"
+                                 i18nKey="a103"
+                                 resourceName="deletePoliciesOnDeleteRS">
+                    <BooleanValues>
+                        <BooleanTrueValue i18nKey="i18nTrue">true</BooleanTrueValue>
+                        <BooleanFalseValue i18nKey="i18nFalse">false</BooleanFalseValue>
+                    </BooleanValues>
+                    <DefaultValues>
+                        <Value>true</Value>
+                    </DefaultValues>
+                </AttributeSchema>
+
+                <AttributeSchema name="uma-delete-resource-sets-on-resource-server-deletion"
+                                 type="single"
+                                 syntax="boolean"
+                                 i18nKey="a104"
+                                 resourceName="deleteResourceSetsOnDeleteRS">
+                    <BooleanValues>
+                        <BooleanTrueValue i18nKey="i18nTrue">true</BooleanTrueValue>
+                        <BooleanFalseValue i18nKey="i18nFalse">false</BooleanFalseValue>
+                    </BooleanValues>
+                    <DefaultValues>
+                        <Value>true</Value>
+                    </DefaultValues>
+                </AttributeSchema>
+
+                <AttributeSchema name="emailResourceOwnerOnPendingRequestCreation"
+                                 type="single"
+                                 syntax="boolean"
+                                 i18nKey="a105">
+                    <BooleanValues>
+                        <BooleanTrueValue i18nKey="i18nTrue">true</BooleanTrueValue>
+                        <BooleanFalseValue i18nKey="i18nFalse">false</BooleanFalseValue>
+                    </BooleanValues>
+                    <DefaultValues>
+                        <Value>true</Value>
+                    </DefaultValues>
+                </AttributeSchema>
+
+                <AttributeSchema name="emailRequestingPartyOnPendingRequestApproval"
+                                 type="single"
+                                 syntax="boolean"
+                                 i18nKey="a106">
+                    <BooleanValues>
+                        <BooleanTrueValue i18nKey="i18nTrue">true</BooleanTrueValue>
+                        <BooleanFalseValue i18nKey="i18nFalse">false</BooleanFalseValue>
+                    </BooleanValues>
+                    <DefaultValues>
+                        <Value>true</Value>
+                    </DefaultValues>
+                </AttributeSchema>
+
+                <AttributeSchema name="userProfileLocaleAttribute"
+                                 type="single"
+                                 syntax="string"
+                                 i18nKey="a107">
+                    <DefaultValues>
+                        <Value>inetOrgPerson</Value>
+                    </DefaultValues>
+                </AttributeSchema>
+
+                <AttributeSchema name="resharingMode"
+                                 type="single_choice"
+                                 syntax="string"
+                                 i18nKey="a108">
+                    <ChoiceValues>
+                        <ChoiceValue i18nKey="resharingModeChoiceOff">OFF</ChoiceValue>
+                        <ChoiceValue i18nKey="resharingModeChoiceImplicit">IMPLICIT</ChoiceValue>
+                    </ChoiceValues>
+                    <DefaultValues>
+                        <Value>IMPLICIT</Value>
+                    </DefaultValues>
+                </AttributeSchema>
+
+                <AttributeSchema name="requireTrustElevation"
+                                 type="single"
+                                 syntax="boolean"
+                                 i18nKey="a109">
+                    <BooleanValues>
+                        <BooleanTrueValue i18nKey="i18nTrue">true</BooleanTrueValue>
+                        <BooleanFalseValue i18nKey="i18nFalse">false</BooleanFalseValue>
+                    </BooleanValues>
+                    <DefaultValues>
+                        <Value>true</Value>
+                    </DefaultValues>
+                </AttributeSchema>
+
+                <!-- TODO bearer MUST always be supported so should we just added it always and not have here? or have here as well? -->
+                <AttributeSchema name="uma-supported-pat-profiles"
+                                 type="list"
+                                 syntax="string"
+                                 i18nKey=""
+                                 resourceName="supportedPatProfiles">
+                    <DefaultValues>
+                        <Value>bearer</Value>
+                    </DefaultValues>
+                </AttributeSchema>
+
+                <!-- TODO bearer MUST always be supported so should we just added it always and not have here? or have here as well? -->
+                <AttributeSchema name="uma-supported-aat-profiles"
+                                 type="list"
+                                 syntax="string"
+                                 i18nKey=""
+                                 resourceName="supportedAatProfiles">
+                    <DefaultValues>
+                        <Value>bearer</Value>
+                    </DefaultValues>
+                </AttributeSchema>
+
+                <!-- TODO bearer MUST always be supported so should we just added it always and not have here? or have here as well? -->
+                <AttributeSchema name="uma-supported-rpt-profiles"
+                                 type="list"
+                                 syntax="string"
+                                 i18nKey=""
+                                 resourceName="supportedRptProfiles">
+                    <DefaultValues>
+                        <Value>bearer</Value>
+                    </DefaultValues>
+                </AttributeSchema>
+
+                <AttributeSchema name="uma-supported-claim-token-profiles"
+                                 type="list"
+                                 syntax="string"
+                                 i18nKey=""
+                                 resourceName="supportedClaimTokenProfiles">
+                    <DefaultValues>
+                    </DefaultValues>
+                </AttributeSchema>
+
+                <AttributeSchema name="uma-supported-uma-profiles"
+                                 type="list"
+                                 syntax="string"
+                                 i18nKey=""
+                                 resourceName="supportedUmaProfiles">
+                    <DefaultValues>
+                    </DefaultValues>
+                </AttributeSchema>
+
+            </Organization>
+        </Schema>
+    </Service>
+</ServicesConfiguration>

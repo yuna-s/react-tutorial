@@ -3,6 +3,8 @@ import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Drawer from '@material-ui/core/Drawer';
+import { Route, Switch } from 'react-router-dom'
+
 
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
@@ -17,6 +19,7 @@ import IconCheck from '../Constance/IconCheck'
 import Copyright from '../Constance/Copyright'
 import MainHeader from './MainHeader'
 import HomePage from './Services/Home/HomePage';
+import DocsPage from './Services/Docs/DocsPage';
 //----------------------------------------------------
 
 
@@ -64,13 +67,13 @@ const useStyles = makeStyles(theme => ({
 export default function Dashboard() {
     const classes = useStyles();
     const [open, setOpen] = React.useState(true);
-    const [selectedIndex, setSelectedIndex] = React.useState(1);
     const handleDrawerOpen = () => {
         setOpen(true);
     };
     const handleDrawerClose = () => {
         setOpen(false);
     };
+
 
 
     return (
@@ -104,7 +107,10 @@ export default function Dashboard() {
             </Drawer>
             <main className={classes.content}>
                 <div className={classes.appBarSpacer} />
-                <HomePage />
+                <Switch>
+                    <Route exact path="/home" component={HomePage} />
+                    <Route exact path="/docs" component={DocsPage} />
+                </Switch>
                 <Copyright />
             </main>
         </div>

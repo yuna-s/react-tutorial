@@ -1,0 +1,881 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ * The contents of this file are subject to the terms of the Common Development and
+ * Distribution License (the License). You may not use this file except in compliance with the
+ * License.
+ *
+ * You can obtain a copy of the License at legal/CDDLv1.0.txt. See the License for the
+ * specific language governing permission and limitations under the License.
+ *
+ * When distributing Covered Software, include this CDDL Header Notice in each file and include
+ * the License file at legal/CDDLv1.0.txt. If applicable, add the following below the CDDL
+ * Header, with the fields enclosed by brackets [] replaced by your own identifying
+ * information: "Portions copyright [year] [name of copyright owner]".
+ *
+ * Copyright 2015-2016 ForgeRock AS.
+-->
+<!DOCTYPE ServicesConfiguration
+        PUBLIC "=//iPlanet//Service Management Services (SMS) 1.0 DTD//EN" "jar://com/sun/identity/sm/sms.dtd">
+
+<ServicesConfiguration>
+    <Service name="AuditService" version="1.0">
+        <Schema serviceHierarchy="/DSAMEConfig/AuditService"
+                i18nFileName="audit"
+                revisionNumber="1"
+                resourceName="audit"
+                i18nKey="audit-description"
+                propertiesViewBeanURL="../audit/RealmAuditConfig">
+            <Global>
+                <AttributeSchema name="auditEnabled" type="single" syntax="boolean" i18nKey="a001">
+                    <BooleanValues>
+                        <BooleanTrueValue>true</BooleanTrueValue>
+                        <BooleanFalseValue>false</BooleanFalseValue>
+                    </BooleanValues>
+                    <DefaultValues>
+                        <Value>true</Value>
+                    </DefaultValues>
+                </AttributeSchema>
+                <AttributeSchema name="fieldFilterPolicy" i18nKey="a004">
+                    <DefaultValues>
+                        <DefaultValuesClassName
+                                className="org.forgerock.openam.audit.configuration.EventFilterDefaultValues">
+                        </DefaultValuesClassName>
+                    </DefaultValues>
+                </AttributeSchema>
+
+                <SubSchema name="CSV" inheritance="multiple" i18nKey="handler.name.csv" i18nFileName="commonAudit">
+                    <AttributeSchema name="enabled" type="single" syntax="boolean" i18nKey="audit.handlers.all.enabled">
+                        <BooleanValues>
+                            <BooleanTrueValue>true</BooleanTrueValue>
+                            <BooleanFalseValue>false</BooleanFalseValue>
+                        </BooleanValues>
+                        <DefaultValues>
+                            <Value>true</Value>
+                        </DefaultValues>
+                    </AttributeSchema>
+                    <AttributeSchema name="topics" type="multiple_choice" i18nKey="audit.handlers.all.topics">
+                        <ChoiceValues>
+                            <ChoiceValuesClassName
+                                    className="org.forgerock.openam.audit.configuration.AuditTopicChoiceValues"/>
+                        </ChoiceValues>
+                        <DefaultValues>
+                            <DefaultValuesClassName
+                                    className="org.forgerock.openam.audit.configuration.AuditTopicDefaultValues"/>
+                        </DefaultValues>
+                    </AttributeSchema>
+                    <AttributeSchema name="location" type="single" i18nKey="audit.handlers.csv.logDirectory">
+                        <DefaultValues>
+                            <Value>%BASE_DIR%/%SERVER_URI%/log/</Value>
+                        </DefaultValues>
+                    </AttributeSchema>
+                    <AttributeSchema name="rotationEnabled" type="single" syntax="boolean"
+                                     i18nKey="audit.handlers.file.rotationEnabled">
+                        <BooleanValues>
+                            <BooleanTrueValue>true</BooleanTrueValue>
+                            <BooleanFalseValue>false</BooleanFalseValue>
+                        </BooleanValues>
+                        <DefaultValues>
+                            <Value>true</Value>
+                        </DefaultValues>
+                    </AttributeSchema>
+                    <AttributeSchema name="rotationMaxFileSize" type="single" i18nKey="audit.handlers.file.maxFileSize">
+                        <DefaultValues>
+                            <Value>100000000</Value>
+                        </DefaultValues>
+                    </AttributeSchema>
+                    <AttributeSchema name="rotationFilePrefix" type="single"
+                                     i18nKey="audit.handlers.file.rotationFilePrefix"/>
+                    <AttributeSchema name="rotationFileSuffix" type="single"
+                                     i18nKey="audit.handlers.file.rotationFileSuffix">
+                        <DefaultValues>
+                            <Value>-yyyy.MM.dd-HH.mm.ss</Value>
+                        </DefaultValues>
+                    </AttributeSchema>
+                    <AttributeSchema name="rotationInterval" type="single"
+                                     i18nKey="audit.handlers.file.rotationInterval">
+                        <DefaultValues>
+                            <Value>-1</Value>
+                        </DefaultValues>
+                    </AttributeSchema>
+                    <AttributeSchema name="rotationTimes" type="list" syntax="string"
+                                     i18nKey="audit.handlers.file.rotationTimes"/>
+                    <AttributeSchema name="retentionMaxNumberOfHistoryFiles" type="single"
+                                     i18nKey="audit.handlers.file.maxNumberOfHistoryFiles">
+                        <DefaultValues>
+                            <Value>1</Value>
+                        </DefaultValues>
+                    </AttributeSchema>
+                    <AttributeSchema name="retentionMaxDiskSpaceToUse" type="single"
+                                     i18nKey="audit.handlers.file.maxDiskSpaceToUse">
+                        <DefaultValues>
+                            <Value>-1</Value>
+                        </DefaultValues>
+                    </AttributeSchema>
+                    <AttributeSchema name="retentionMinFreeSpaceRequired" type="single"
+                                     i18nKey="audit.handlers.file.minFreeSpaceRequired">
+                        <DefaultValues>
+                            <Value>-1</Value>
+                        </DefaultValues>
+                    </AttributeSchema>
+                    <AttributeSchema name="bufferingEnabled" type="single" syntax="boolean"
+                                     i18nKey="audit.handlers.csv.buffering.enabled">
+                        <BooleanValues>
+                            <BooleanTrueValue>true</BooleanTrueValue>
+                            <BooleanFalseValue>false</BooleanFalseValue>
+                        </BooleanValues>
+                        <DefaultValues>
+                            <Value>true</Value>
+                        </DefaultValues>
+                    </AttributeSchema>
+                    <AttributeSchema name="bufferingAutoFlush" type="single" syntax="boolean"
+                                     i18nKey="audit.handlers.csv.buffering.autoFlush">
+                        <BooleanValues>
+                            <BooleanTrueValue>true</BooleanTrueValue>
+                            <BooleanFalseValue>false</BooleanFalseValue>
+                        </BooleanValues>
+                        <DefaultValues>
+                            <Value>false</Value>
+                        </DefaultValues>
+                    </AttributeSchema>
+                    <AttributeSchema name="securityEnabled" type="single" syntax="boolean"
+                                     i18nKey="audit.handlers.csv.security.enabled">
+                        <BooleanValues>
+                            <BooleanTrueValue>true</BooleanTrueValue>
+                            <BooleanFalseValue>false</BooleanFalseValue>
+                        </BooleanValues>
+                        <DefaultValues>
+                            <Value>false</Value>
+                        </DefaultValues>
+                    </AttributeSchema>
+                    <AttributeSchema name="securityFilename" type="single"
+                                     i18nKey="audit.handlers.csv.security.filename">
+                        <DefaultValues>
+                            <Value>%BASE_DIR%/%SERVER_URI%/Logger.jks</Value>
+                        </DefaultValues>
+                    </AttributeSchema>
+                    <AttributeSchema name="securityPassword" type="single" syntax="password"
+                                     i18nKey="audit.handlers.csv.security.password"/>
+                    <AttributeSchema name="securitySignatureInterval" type="single"
+                                     i18nKey="audit.handlers.csv.security.signatureInterval">
+                        <DefaultValues>
+                            <Value>900</Value>
+                        </DefaultValues>
+                    </AttributeSchema>
+                    <AttributeSchema name="handlerFactory" type="single" i18nKey="handler.factory">
+                        <DefaultValues>
+                            <Value>org.forgerock.openam.audit.events.handlers.CsvAuditEventHandlerFactory</Value>
+                        </DefaultValues>
+                    </AttributeSchema>
+                </SubSchema>
+
+                <SubSchema name="Syslog" inheritance="multiple" i18nKey="handler.name.syslog"
+                           i18nFileName="commonAudit">
+                    <AttributeSchema name="PositiveIntegerValidator"
+                                     type="validator"
+                                     syntax="string">
+                        <DefaultValues>
+                            <Value>org.forgerock.openam.audit.validation.PositiveIntegerValidator</Value>
+                        </DefaultValues>
+                    </AttributeSchema>
+                    <AttributeSchema name="HostnameValidator"
+                                     type="validator"
+                                     syntax="string">
+                        <DefaultValues>
+                            <Value>org.forgerock.openam.audit.validation.HostnameValidator</Value>
+                        </DefaultValues>
+                    </AttributeSchema>
+                    <AttributeSchema name="enabled" type="single" syntax="boolean" i18nKey="audit.handlers.all.enabled">
+                        <BooleanValues>
+                            <BooleanTrueValue>true</BooleanTrueValue>
+                            <BooleanFalseValue>false</BooleanFalseValue>
+                        </BooleanValues>
+                        <DefaultValues>
+                            <Value>true</Value>
+                        </DefaultValues>
+                    </AttributeSchema>
+                    <AttributeSchema name="topics" type="multiple_choice" i18nKey="audit.handlers.all.topics">
+                        <ChoiceValues>
+                            <ChoiceValuesClassName
+                                    className="org.forgerock.openam.audit.configuration.AuditTopicChoiceValues"/>
+                        </ChoiceValues>
+                        <DefaultValues>
+                            <DefaultValuesClassName
+                                    className="org.forgerock.openam.audit.configuration.AuditTopicDefaultValues"/>
+                        </DefaultValues>
+                    </AttributeSchema>
+                    <AttributeSchema name="host" type="single" i18nKey="audit.handlers.syslog.host"
+                                     validator="HostnameValidator"/>
+                    <AttributeSchema name="port" type="single" i18nKey="audit.handlers.syslog.port"
+                                     validator="PositiveIntegerValidator" />
+                    <AttributeSchema name="transportProtocol" i18nKey="audit.handlers.syslog.transportProtocol"
+                                     type="single_choice">
+                        <ChoiceValues>
+                            <ChoiceValue>TCP</ChoiceValue>
+                            <ChoiceValue>UDP</ChoiceValue>
+                        </ChoiceValues>
+                        <DefaultValues>
+                            <Value>TCP</Value>
+                        </DefaultValues>
+                    </AttributeSchema>
+                    <AttributeSchema name="connectTimeout" type="single" i18nKey="audit.handlers.syslog.connectTimeout"
+                                     validator="PositiveIntegerValidator"/>
+                    <AttributeSchema name="facility" i18nKey="audit.handlers.syslog.facility" type="single_choice">
+                        <ChoiceValues>
+                            <ChoiceValue>KERN</ChoiceValue>
+                            <ChoiceValue>USER</ChoiceValue>
+                            <ChoiceValue>MAIL</ChoiceValue>
+                            <ChoiceValue>DAEMON</ChoiceValue>
+                            <ChoiceValue>AUTH</ChoiceValue>
+                            <ChoiceValue>SYSLOG</ChoiceValue>
+                            <ChoiceValue>LPR</ChoiceValue>
+                            <ChoiceValue>NEWS</ChoiceValue>
+                            <ChoiceValue>UUCP</ChoiceValue>
+                            <ChoiceValue>CRON</ChoiceValue>
+                            <ChoiceValue>AUTHPRIV</ChoiceValue>
+                            <ChoiceValue>FTP</ChoiceValue>
+                            <ChoiceValue>NTP</ChoiceValue>
+                            <ChoiceValue>LOGAUDIT</ChoiceValue>
+                            <ChoiceValue>LOGALERT</ChoiceValue>
+                            <ChoiceValue>CLOCKD</ChoiceValue>
+                            <ChoiceValue>LOCAL0</ChoiceValue>
+                            <ChoiceValue>LOCAL1</ChoiceValue>
+                            <ChoiceValue>LOCAL2</ChoiceValue>
+                            <ChoiceValue>LOCAL3</ChoiceValue>
+                            <ChoiceValue>LOCAL4</ChoiceValue>
+                            <ChoiceValue>LOCAL5</ChoiceValue>
+                            <ChoiceValue>LOCAL6</ChoiceValue>
+                            <ChoiceValue>LOCAL7</ChoiceValue>
+                        </ChoiceValues>
+                        <DefaultValues>
+                            <Value>USER</Value>
+                        </DefaultValues>
+                    </AttributeSchema>
+                    <AttributeSchema name="bufferingEnabled" type="single" syntax="boolean"
+                                     i18nKey="audit.handlers.syslog.buffering.enabled">
+                        <BooleanValues>
+                            <BooleanTrueValue>true</BooleanTrueValue>
+                            <BooleanFalseValue>false</BooleanFalseValue>
+                        </BooleanValues>
+                        <DefaultValues>
+                            <Value>true</Value>
+                        </DefaultValues>
+                    </AttributeSchema>
+                    <AttributeSchema name="handlerFactory" type="single" i18nKey="handler.factory">
+                        <DefaultValues>
+                            <Value>org.forgerock.openam.audit.events.handlers.SyslogAuditEventHandlerFactory</Value>
+                        </DefaultValues>
+                    </AttributeSchema>
+                </SubSchema>
+
+                <SubSchema name="JDBC" inheritance="multiple" i18nKey="handler.name.jdbc" i18nFileName="commonAudit">
+                    <AttributeSchema name="enabled" type="single" syntax="boolean" i18nKey="audit.handlers.all.enabled">
+                        <BooleanValues>
+                            <BooleanTrueValue>true</BooleanTrueValue>
+                            <BooleanFalseValue>false</BooleanFalseValue>
+                        </BooleanValues>
+                        <DefaultValues>
+                            <Value>true</Value>
+                        </DefaultValues>
+                    </AttributeSchema>
+                    <AttributeSchema name="topics" type="multiple_choice" i18nKey="audit.handlers.all.topics">
+                        <ChoiceValues>
+                            <ChoiceValuesClassName
+                                    className="org.forgerock.openam.audit.configuration.AuditTopicChoiceValues"/>
+                        </ChoiceValues>
+                        <DefaultValues>
+                            <DefaultValuesClassName
+                                    className="org.forgerock.openam.audit.configuration.AuditTopicDefaultValues"/>
+                        </DefaultValues>
+                    </AttributeSchema>
+                    <AttributeSchema name="databaseType" listOrder="insertion" type="single_choice" uitype="radio"
+                                     i18nKey="audit.handlers.jdbc.databaseType">
+                        <ChoiceValues>
+                            <ChoiceValuesClassName
+                                    className="org.forgerock.openam.audit.configuration.JdbcDatabaseTypeChoiceValues"/>
+                        </ChoiceValues>
+                        <DefaultValues>
+                            <Value>oracle</Value>
+                        </DefaultValues>
+                    </AttributeSchema>
+                    <AttributeSchema name="jdbcUrl" type="single" i18nKey="audit.handlers.jdbc.connectionPool.jdbcUrl"/>
+                    <AttributeSchema name="driverClassName" type="single"
+                                     i18nKey="audit.handlers.jdbc.connectionPool.driverClassName"/>
+                    <AttributeSchema name="username" type="single"
+                                     i18nKey="audit.handlers.jdbc.connectionPool.username"/>
+                    <AttributeSchema name="password" type="single" syntax="password"
+                                     i18nKey="audit.handlers.jdbc.connectionPool.password"/>
+                    <AttributeSchema name="autoCommit" type="single" syntax="boolean">
+                        <BooleanValues>
+                            <BooleanTrueValue>true</BooleanTrueValue>
+                            <BooleanFalseValue>false</BooleanFalseValue>
+                        </BooleanValues>
+                        <DefaultValues>
+                            <Value>false</Value>
+                        </DefaultValues>
+                    </AttributeSchema>
+                    <AttributeSchema name="connectionTimeout" type="single"
+                                     i18nKey="audit.handlers.jdbc.connectionPool.connectionTimeout">
+                        <DefaultValues>
+                            <Value>30</Value>
+                        </DefaultValues>
+                    </AttributeSchema>
+                    <AttributeSchema name="idleTimeout" type="single"
+                                     i18nKey="audit.handlers.jdbc.connectionPool.idleTimeout">
+                        <DefaultValues>
+                            <Value>600</Value>
+                        </DefaultValues>
+                    </AttributeSchema>
+                    <AttributeSchema name="maxLifetime" type="single"
+                                     i18nKey="audit.handlers.jdbc.connectionPool.maxLifetime">
+                        <DefaultValues>
+                            <Value>1800</Value>
+                        </DefaultValues>
+                    </AttributeSchema>
+                    <AttributeSchema name="minIdle" type="single" i18nKey="audit.handlers.jdbc.connectionPool.minIdle">
+                        <DefaultValues>
+                            <Value>10</Value>
+                        </DefaultValues>
+                    </AttributeSchema>
+                    <AttributeSchema name="maxPoolSize" type="single"
+                                     i18nKey="audit.handlers.jdbc.connectionPool.maxPoolSize">
+                        <DefaultValues>
+                            <Value>10</Value>
+                        </DefaultValues>
+                    </AttributeSchema>
+                    <AttributeSchema name="authenticationEventTable" type="single">
+                        <DefaultValues>
+                            <Value>am_auditauthentication</Value>
+                        </DefaultValues>
+                    </AttributeSchema>
+                    <AttributeSchema name="authenticationEventColumns" listOrder="insertion" uitype="maplist">
+                        <DefaultValues>
+                            <DefaultValuesClassName
+                                    className="org.forgerock.openam.audit.configuration.JdbcFieldToColumnDefaultValues">
+                                <AttributeValuePair>
+                                    <Attribute name="topic"/>
+                                    <Value>authentication</Value>
+                                </AttributeValuePair>
+                            </DefaultValuesClassName>
+                        </DefaultValues>
+                    </AttributeSchema>
+                    <AttributeSchema name="activityEventTable" type="single">
+                        <DefaultValues>
+                            <Value>am_auditactivity</Value>
+                        </DefaultValues>
+                    </AttributeSchema>
+                    <AttributeSchema name="activityEventColumns" listOrder="insertion" uitype="maplist">
+                        <DefaultValues>
+                            <DefaultValuesClassName
+                                    className="org.forgerock.openam.audit.configuration.JdbcFieldToColumnDefaultValues">
+                                <AttributeValuePair>
+                                    <Attribute name="topic"/>
+                                    <Value>activity</Value>
+                                </AttributeValuePair>
+                            </DefaultValuesClassName>
+                        </DefaultValues>
+                    </AttributeSchema>
+                    <AttributeSchema name="accessEventTable" type="single">
+                        <DefaultValues>
+                            <Value>am_auditaccess</Value>
+                        </DefaultValues>
+                    </AttributeSchema>
+                    <AttributeSchema name="accessEventColumns" listOrder="insertion" uitype="maplist">
+                        <DefaultValues>
+                            <DefaultValuesClassName
+                                    className="org.forgerock.openam.audit.configuration.JdbcFieldToColumnDefaultValues">
+                                <AttributeValuePair>
+                                    <Attribute name="topic"/>
+                                    <Value>access</Value>
+                                </AttributeValuePair>
+                            </DefaultValuesClassName>
+                        </DefaultValues>
+                    </AttributeSchema>
+                    <AttributeSchema name="configEventTable" type="single">
+                        <DefaultValues>
+                            <Value>am_auditconfig</Value>
+                        </DefaultValues>
+                    </AttributeSchema>
+                    <AttributeSchema name="configEventColumns" listOrder="insertion" uitype="maplist">
+                        <DefaultValues>
+                            <DefaultValuesClassName
+                                    className="org.forgerock.openam.audit.configuration.JdbcFieldToColumnDefaultValues">
+                                <AttributeValuePair>
+                                    <Attribute name="topic"/>
+                                    <Value>config</Value>
+                                </AttributeValuePair>
+                            </DefaultValuesClassName>
+                        </DefaultValues>
+                    </AttributeSchema>
+                    <AttributeSchema name="bufferingEnabled" type="single" syntax="boolean"
+                                     i18nKey="audit.handlers.jdbc.buffering.enabled">
+                        <BooleanValues>
+                            <BooleanTrueValue>true</BooleanTrueValue>
+                            <BooleanFalseValue>false</BooleanFalseValue>
+                        </BooleanValues>
+                        <DefaultValues>
+                            <Value>true</Value>
+                        </DefaultValues>
+                    </AttributeSchema>
+                    <AttributeSchema name="bufferingMaxSize" type="single"
+                                     i18nKey="audit.handlers.jdbc.buffering.maxSize">
+                        <DefaultValues>
+                            <Value>100000</Value>
+                        </DefaultValues>
+                    </AttributeSchema>
+                    <AttributeSchema name="bufferingWriteInterval" type="single"
+                                     i18nKey="audit.handlers.jdbc.buffering.interval">
+                        <DefaultValues>
+                            <Value>5</Value>
+                        </DefaultValues>
+                    </AttributeSchema>
+                    <AttributeSchema name="bufferingWriterThreads" type="single"
+                                     i18nKey="audit.handlers.jdbc.buffering.writerThreads">
+                        <DefaultValues>
+                            <Value>1</Value>
+                        </DefaultValues>
+                    </AttributeSchema>
+                    <AttributeSchema name="bufferingMaxBatchedEvents" type="single"
+                                     i18nKey="audit.handlers.jdbc.buffering.maxBatchedEvents">
+                        <DefaultValues>
+                            <Value>100</Value>
+                        </DefaultValues>
+                    </AttributeSchema>
+                    <AttributeSchema name="handlerFactory" type="single" i18nKey="handler.factory">
+                        <DefaultValues>
+                            <Value>org.forgerock.openam.audit.events.handlers.JdbcAuditEventHandlerFactory</Value>
+                        </DefaultValues>
+                    </AttributeSchema>
+                </SubSchema>
+            </Global>
+
+            <Organization>
+                <AttributeSchema name="auditEnabled" type="single" syntax="boolean" i18nKey="a001">
+                    <BooleanValues>
+                        <BooleanTrueValue>true</BooleanTrueValue>
+                        <BooleanFalseValue>false</BooleanFalseValue>
+                    </BooleanValues>
+                    <DefaultValues>
+                        <Value>true</Value>
+                    </DefaultValues>
+                </AttributeSchema>
+                <AttributeSchema name="fieldFilterPolicy" i18nKey="a004">
+                    <DefaultValues>
+                        <DefaultValuesClassName
+                                className="org.forgerock.openam.audit.configuration.EventFilterDefaultValues">
+                        </DefaultValuesClassName>
+                    </DefaultValues>
+                </AttributeSchema>
+
+                <SubSchema name="CSV" inheritance="multiple" i18nKey="handler.name.csv" i18nFileName="commonAudit">
+                    <AttributeSchema name="enabled" type="single" syntax="boolean" i18nKey="audit.handlers.all.enabled">
+                        <BooleanValues>
+                            <BooleanTrueValue>true</BooleanTrueValue>
+                            <BooleanFalseValue>false</BooleanFalseValue>
+                        </BooleanValues>
+                        <DefaultValues>
+                            <Value>true</Value>
+                        </DefaultValues>
+                    </AttributeSchema>
+                    <AttributeSchema name="topics" type="multiple_choice" i18nKey="audit.handlers.all.topics">
+                        <ChoiceValues>
+                            <ChoiceValuesClassName
+                                    className="org.forgerock.openam.audit.configuration.AuditTopicChoiceValues"/>
+                        </ChoiceValues>
+                        <DefaultValues>
+                            <DefaultValuesClassName
+                                    className="org.forgerock.openam.audit.configuration.AuditTopicDefaultValues"/>
+                        </DefaultValues>
+                    </AttributeSchema>
+                    <AttributeSchema name="location" type="single" i18nKey="audit.handlers.csv.logDirectory">
+                        <DefaultValues>
+                            <Value>%BASE_DIR%/%SERVER_URI%/log/</Value>
+                        </DefaultValues>
+                    </AttributeSchema>
+                    <AttributeSchema name="rotationEnabled" type="single" syntax="boolean"
+                                     i18nKey="audit.handlers.file.rotationEnabled">
+                        <BooleanValues>
+                            <BooleanTrueValue>true</BooleanTrueValue>
+                            <BooleanFalseValue>false</BooleanFalseValue>
+                        </BooleanValues>
+                        <DefaultValues>
+                            <Value>true</Value>
+                        </DefaultValues>
+                    </AttributeSchema>
+                    <AttributeSchema name="rotationMaxFileSize" type="single" i18nKey="audit.handlers.file.maxFileSize">
+                        <DefaultValues>
+                            <Value>100000000</Value>
+                        </DefaultValues>
+                    </AttributeSchema>
+                    <AttributeSchema name="rotationFilePrefix" type="single"
+                                     i18nKey="audit.handlers.file.rotationFilePrefix"/>
+                    <AttributeSchema name="rotationFileSuffix" type="single"
+                                     i18nKey="audit.handlers.file.rotationFileSuffix">
+                        <DefaultValues>
+                            <Value>-yyyy.MM.dd-HH.mm.ss</Value>
+                        </DefaultValues>
+                    </AttributeSchema>
+                    <AttributeSchema name="rotationInterval" type="single"
+                                     i18nKey="audit.handlers.file.rotationInterval">
+                        <DefaultValues>
+                            <Value>-1</Value>
+                        </DefaultValues>
+                    </AttributeSchema>
+                    <AttributeSchema name="rotationTimes" type="list" syntax="string"
+                                     i18nKey="audit.handlers.file.rotationTimes"/>
+                    <AttributeSchema name="retentionMaxNumberOfHistoryFiles" type="single"
+                                     i18nKey="audit.handlers.file.maxNumberOfHistoryFiles">
+                        <DefaultValues>
+                            <Value>1</Value>
+                        </DefaultValues>
+                    </AttributeSchema>
+                    <AttributeSchema name="retentionMaxDiskSpaceToUse" type="single"
+                                     i18nKey="audit.handlers.file.maxDiskSpaceToUse">
+                        <DefaultValues>
+                            <Value>-1</Value>
+                        </DefaultValues>
+                    </AttributeSchema>
+                    <AttributeSchema name="retentionMinFreeSpaceRequired" type="single"
+                                     i18nKey="audit.handlers.file.minFreeSpaceRequired">
+                        <DefaultValues>
+                            <Value>-1</Value>
+                        </DefaultValues>
+                    </AttributeSchema>
+                    <AttributeSchema name="bufferingEnabled" type="single" syntax="boolean"
+                                     i18nKey="audit.handlers.csv.buffering.enabled">
+                        <BooleanValues>
+                            <BooleanTrueValue>true</BooleanTrueValue>
+                            <BooleanFalseValue>false</BooleanFalseValue>
+                        </BooleanValues>
+                        <DefaultValues>
+                            <Value>true</Value>
+                        </DefaultValues>
+                    </AttributeSchema>
+                    <AttributeSchema name="bufferingAutoFlush" type="single" syntax="boolean"
+                                     i18nKey="audit.handlers.csv.buffering.autoFlush">
+                        <BooleanValues>
+                            <BooleanTrueValue>true</BooleanTrueValue>
+                            <BooleanFalseValue>false</BooleanFalseValue>
+                        </BooleanValues>
+                        <DefaultValues>
+                            <Value>false</Value>
+                        </DefaultValues>
+                    </AttributeSchema>
+                    <AttributeSchema name="securityEnabled" type="single" syntax="boolean"
+                                     i18nKey="audit.handlers.csv.security.enabled">
+                        <BooleanValues>
+                            <BooleanTrueValue>true</BooleanTrueValue>
+                            <BooleanFalseValue>false</BooleanFalseValue>
+                        </BooleanValues>
+                        <DefaultValues>
+                            <Value>false</Value>
+                        </DefaultValues>
+                    </AttributeSchema>
+                    <AttributeSchema name="securityFilename" type="single"
+                                     i18nKey="audit.handlers.csv.security.filename">
+                        <DefaultValues>
+                            <Value>%BASE_DIR%/%SERVER_URI%/Logger.jks</Value>
+                        </DefaultValues>
+                    </AttributeSchema>
+                    <AttributeSchema name="securityPassword" type="single" syntax="password"
+                                     i18nKey="audit.handlers.csv.security.password"/>
+                    <AttributeSchema name="securitySignatureInterval" type="single"
+                                     i18nKey="audit.handlers.csv.security.signatureInterval">
+                        <DefaultValues>
+                            <Value>900</Value>
+                        </DefaultValues>
+                    </AttributeSchema>
+                    <AttributeSchema name="handlerFactory" type="single" i18nKey="handler.factory">
+                        <DefaultValues>
+                            <Value>org.forgerock.openam.audit.events.handlers.CsvAuditEventHandlerFactory</Value>
+                        </DefaultValues>
+                    </AttributeSchema>
+                </SubSchema>
+
+                <SubSchema name="Syslog" inheritance="multiple" i18nKey="handler.name.syslog"
+                           i18nFileName="commonAudit">
+                    <AttributeSchema name="PositiveIntegerValidator"
+                                     type="validator"
+                                     syntax="string">
+                        <DefaultValues>
+                            <Value>org.forgerock.openam.audit.validation.PositiveIntegerValidator</Value>
+                        </DefaultValues>
+                    </AttributeSchema>
+                    <AttributeSchema name="HostnameValidator"
+                                     type="validator"
+                                     syntax="string">
+                        <DefaultValues>
+                            <Value>org.forgerock.openam.audit.validation.HostnameValidator</Value>
+                        </DefaultValues>
+                    </AttributeSchema>
+                    <AttributeSchema name="enabled" type="single" syntax="boolean" i18nKey="audit.handlers.all.enabled">
+                        <BooleanValues>
+                            <BooleanTrueValue>true</BooleanTrueValue>
+                            <BooleanFalseValue>false</BooleanFalseValue>
+                        </BooleanValues>
+                        <DefaultValues>
+                            <Value>true</Value>
+                        </DefaultValues>
+                    </AttributeSchema>
+                    <AttributeSchema name="topics" type="multiple_choice" i18nKey="audit.handlers.all.topics">
+                        <ChoiceValues>
+                            <ChoiceValuesClassName
+                                    className="org.forgerock.openam.audit.configuration.AuditTopicChoiceValues"/>
+                        </ChoiceValues>
+                        <DefaultValues>
+                            <DefaultValuesClassName
+                                    className="org.forgerock.openam.audit.configuration.AuditTopicDefaultValues"/>
+                        </DefaultValues>
+                    </AttributeSchema>
+                    <AttributeSchema name="host" type="single" i18nKey="audit.handlers.syslog.host"
+                                     validator="HostnameValidator"/>
+                    <AttributeSchema name="port" type="single" i18nKey="audit.handlers.syslog.port"
+                                     validator="PositiveIntegerValidator" />
+                    <AttributeSchema name="transportProtocol" i18nKey="audit.handlers.syslog.transportProtocol"
+                                     type="single_choice">
+                        <ChoiceValues>
+                            <ChoiceValue>TCP</ChoiceValue>
+                            <ChoiceValue>UDP</ChoiceValue>
+                        </ChoiceValues>
+                        <DefaultValues>
+                            <Value>TCP</Value>
+                        </DefaultValues>
+                    </AttributeSchema>
+                    <AttributeSchema name="connectTimeout" type="single" i18nKey="audit.handlers.syslog.connectTimeout"
+                                     validator="PositiveIntegerValidator"/>
+                    <AttributeSchema name="facility" i18nKey="audit.handlers.syslog.facility" type="single_choice">
+                        <ChoiceValues>
+                            <ChoiceValue>KERN</ChoiceValue>
+                            <ChoiceValue>USER</ChoiceValue>
+                            <ChoiceValue>MAIL</ChoiceValue>
+                            <ChoiceValue>DAEMON</ChoiceValue>
+                            <ChoiceValue>AUTH</ChoiceValue>
+                            <ChoiceValue>SYSLOG</ChoiceValue>
+                            <ChoiceValue>LPR</ChoiceValue>
+                            <ChoiceValue>NEWS</ChoiceValue>
+                            <ChoiceValue>UUCP</ChoiceValue>
+                            <ChoiceValue>CRON</ChoiceValue>
+                            <ChoiceValue>AUTHPRIV</ChoiceValue>
+                            <ChoiceValue>FTP</ChoiceValue>
+                            <ChoiceValue>NTP</ChoiceValue>
+                            <ChoiceValue>LOGAUDIT</ChoiceValue>
+                            <ChoiceValue>LOGALERT</ChoiceValue>
+                            <ChoiceValue>CLOCKD</ChoiceValue>
+                            <ChoiceValue>LOCAL0</ChoiceValue>
+                            <ChoiceValue>LOCAL1</ChoiceValue>
+                            <ChoiceValue>LOCAL2</ChoiceValue>
+                            <ChoiceValue>LOCAL3</ChoiceValue>
+                            <ChoiceValue>LOCAL4</ChoiceValue>
+                            <ChoiceValue>LOCAL5</ChoiceValue>
+                            <ChoiceValue>LOCAL6</ChoiceValue>
+                            <ChoiceValue>LOCAL7</ChoiceValue>
+                        </ChoiceValues>
+                        <DefaultValues>
+                            <Value>USER</Value>
+                        </DefaultValues>
+                    </AttributeSchema>
+                    <AttributeSchema name="bufferingEnabled" type="single" syntax="boolean"
+                                     i18nKey="audit.handlers.syslog.buffering.enabled">
+                        <BooleanValues>
+                            <BooleanTrueValue>true</BooleanTrueValue>
+                            <BooleanFalseValue>false</BooleanFalseValue>
+                        </BooleanValues>
+                        <DefaultValues>
+                            <Value>true</Value>
+                        </DefaultValues>
+                    </AttributeSchema>
+                    <AttributeSchema name="handlerFactory" type="single" i18nKey="handler.factory">
+                        <DefaultValues>
+                            <Value>org.forgerock.openam.audit.events.handlers.SyslogAuditEventHandlerFactory</Value>
+                        </DefaultValues>
+                    </AttributeSchema>
+                </SubSchema>
+
+                <SubSchema name="JDBC" inheritance="multiple" i18nKey="handler.name.jdbc" i18nFileName="commonAudit">
+                    <AttributeSchema name="enabled" type="single" syntax="boolean" i18nKey="audit.handlers.all.enabled">
+                        <BooleanValues>
+                            <BooleanTrueValue>true</BooleanTrueValue>
+                            <BooleanFalseValue>false</BooleanFalseValue>
+                        </BooleanValues>
+                        <DefaultValues>
+                            <Value>true</Value>
+                        </DefaultValues>
+                    </AttributeSchema>
+                    <AttributeSchema name="topics" type="multiple_choice" i18nKey="audit.handlers.all.topics">
+                        <ChoiceValues>
+                            <ChoiceValuesClassName
+                                    className="org.forgerock.openam.audit.configuration.AuditTopicChoiceValues"/>
+                        </ChoiceValues>
+                        <DefaultValues>
+                            <DefaultValuesClassName
+                                    className="org.forgerock.openam.audit.configuration.AuditTopicDefaultValues"/>
+                        </DefaultValues>
+                    </AttributeSchema>
+                    <AttributeSchema name="databaseType" listOrder="insertion" type="single_choice" uitype="radio"
+                                     i18nKey="audit.handlers.jdbc.databaseType">
+                        <ChoiceValues>
+                            <ChoiceValuesClassName
+                                    className="org.forgerock.openam.audit.configuration.JdbcDatabaseTypeChoiceValues"/>
+                        </ChoiceValues>
+                        <DefaultValues>
+                            <Value>oracle</Value>
+                        </DefaultValues>
+                    </AttributeSchema>
+                    <AttributeSchema name="jdbcUrl" type="single" i18nKey="audit.handlers.jdbc.connectionPool.jdbcUrl"/>
+                    <AttributeSchema name="driverClassName" type="single"
+                                     i18nKey="audit.handlers.jdbc.connectionPool.driverClassName"/>
+                    <AttributeSchema name="username" type="single"
+                                     i18nKey="audit.handlers.jdbc.connectionPool.username"/>
+                    <AttributeSchema name="password" type="single" syntax="password"
+                                     i18nKey="audit.handlers.jdbc.connectionPool.password"/>
+                    <AttributeSchema name="autoCommit" type="single" syntax="boolean">
+                        <BooleanValues>
+                            <BooleanTrueValue>true</BooleanTrueValue>
+                            <BooleanFalseValue>false</BooleanFalseValue>
+                        </BooleanValues>
+                        <DefaultValues>
+                            <Value>false</Value>
+                        </DefaultValues>
+                    </AttributeSchema>
+                    <AttributeSchema name="connectionTimeout" type="single"
+                                     i18nKey="audit.handlers.jdbc.connectionPool.connectionTimeout">
+                        <DefaultValues>
+                            <Value>30</Value>
+                        </DefaultValues>
+                    </AttributeSchema>
+                    <AttributeSchema name="idleTimeout" type="single"
+                                     i18nKey="audit.handlers.jdbc.connectionPool.idleTimeout">
+                        <DefaultValues>
+                            <Value>600</Value>
+                        </DefaultValues>
+                    </AttributeSchema>
+                    <AttributeSchema name="maxLifetime" type="single"
+                                     i18nKey="audit.handlers.jdbc.connectionPool.maxLifetime">
+                        <DefaultValues>
+                            <Value>1800</Value>
+                        </DefaultValues>
+                    </AttributeSchema>
+                    <AttributeSchema name="minIdle" type="single" i18nKey="audit.handlers.jdbc.connectionPool.minIdle">
+                        <DefaultValues>
+                            <Value>10</Value>
+                        </DefaultValues>
+                    </AttributeSchema>
+                    <AttributeSchema name="maxPoolSize" type="single"
+                                     i18nKey="audit.handlers.jdbc.connectionPool.maxPoolSize">
+                        <DefaultValues>
+                            <Value>10</Value>
+                        </DefaultValues>
+                    </AttributeSchema>
+                    <AttributeSchema name="authenticationEventTable" type="single">
+                        <DefaultValues>
+                            <Value>am_auditauthentication</Value>
+                        </DefaultValues>
+                    </AttributeSchema>
+                    <AttributeSchema name="authenticationEventColumns" listOrder="insertion" uitype="maplist">
+                        <DefaultValues>
+                            <DefaultValuesClassName
+                                    className="org.forgerock.openam.audit.configuration.JdbcFieldToColumnDefaultValues">
+                                <AttributeValuePair>
+                                    <Attribute name="topic"/>
+                                    <Value>authentication</Value>
+                                </AttributeValuePair>
+                            </DefaultValuesClassName>
+                        </DefaultValues>
+                    </AttributeSchema>
+                    <AttributeSchema name="activityEventTable" type="single">
+                        <DefaultValues>
+                            <Value>am_auditactivity</Value>
+                        </DefaultValues>
+                    </AttributeSchema>
+                    <AttributeSchema name="activityEventColumns" listOrder="insertion" uitype="maplist">
+                        <DefaultValues>
+                            <DefaultValuesClassName
+                                    className="org.forgerock.openam.audit.configuration.JdbcFieldToColumnDefaultValues">
+                                <AttributeValuePair>
+                                    <Attribute name="topic"/>
+                                    <Value>activity</Value>
+                                </AttributeValuePair>
+                            </DefaultValuesClassName>
+                        </DefaultValues>
+                    </AttributeSchema>
+                    <AttributeSchema name="accessEventTable" type="single">
+                        <DefaultValues>
+                            <Value>am_auditaccess</Value>
+                        </DefaultValues>
+                    </AttributeSchema>
+                    <AttributeSchema name="accessEventColumns" listOrder="insertion" uitype="maplist">
+                        <DefaultValues>
+                            <DefaultValuesClassName
+                                    className="org.forgerock.openam.audit.configuration.JdbcFieldToColumnDefaultValues">
+                                <AttributeValuePair>
+                                    <Attribute name="topic"/>
+                                    <Value>access</Value>
+                                </AttributeValuePair>
+                            </DefaultValuesClassName>
+                        </DefaultValues>
+                    </AttributeSchema>
+                    <AttributeSchema name="configEventTable" type="single">
+                        <DefaultValues>
+                            <Value>am_auditconfig</Value>
+                        </DefaultValues>
+                    </AttributeSchema>
+                    <AttributeSchema name="configEventColumns" listOrder="insertion" uitype="maplist">
+                        <DefaultValues>
+                            <DefaultValuesClassName
+                                    className="org.forgerock.openam.audit.configuration.JdbcFieldToColumnDefaultValues">
+                                <AttributeValuePair>
+                                    <Attribute name="topic"/>
+                                    <Value>config</Value>
+                                </AttributeValuePair>
+                            </DefaultValuesClassName>
+                        </DefaultValues>
+                    </AttributeSchema>
+                    <AttributeSchema name="bufferingEnabled" type="single" syntax="boolean"
+                                     i18nKey="audit.handlers.jdbc.buffering.enabled">
+                        <BooleanValues>
+                            <BooleanTrueValue>true</BooleanTrueValue>
+                            <BooleanFalseValue>false</BooleanFalseValue>
+                        </BooleanValues>
+                        <DefaultValues>
+                            <Value>true</Value>
+                        </DefaultValues>
+                    </AttributeSchema>
+                    <AttributeSchema name="bufferingMaxSize" type="single"
+                                     i18nKey="audit.handlers.jdbc.buffering.maxSize">
+                        <DefaultValues>
+                            <Value>100000</Value>
+                        </DefaultValues>
+                    </AttributeSchema>
+                    <AttributeSchema name="bufferingWriteInterval" type="single"
+                                     i18nKey="audit.handlers.jdbc.buffering.interval">
+                        <DefaultValues>
+                            <Value>5</Value>
+                        </DefaultValues>
+                    </AttributeSchema>
+                    <AttributeSchema name="bufferingWriterThreads" type="single"
+                                     i18nKey="audit.handlers.jdbc.buffering.writerThreads">
+                        <DefaultValues>
+                            <Value>1</Value>
+                        </DefaultValues>
+                    </AttributeSchema>
+                    <AttributeSchema name="bufferingMaxBatchedEvents" type="single"
+                                     i18nKey="audit.handlers.jdbc.buffering.maxBatchedEvents">
+                        <DefaultValues>
+                            <Value>100</Value>
+                        </DefaultValues>
+                    </AttributeSchema>
+                    <AttributeSchema name="handlerFactory" type="single" i18nKey="handler.factory">
+                        <DefaultValues>
+                            <Value>org.forgerock.openam.audit.events.handlers.JdbcAuditEventHandlerFactory</Value>
+                        </DefaultValues>
+                    </AttributeSchema>
+                </SubSchema>
+            </Organization>
+        </Schema>
+
+        <Configuration>
+            <GlobalConfiguration>
+                <SubConfiguration name="Global CSV Handler" id="CSV"/>
+            </GlobalConfiguration>
+        </Configuration>
+    </Service>
+</ServicesConfiguration>

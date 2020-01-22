@@ -10,9 +10,9 @@ import IconCheck from '../../Constance/IconCheck'
 //アイコン問題はあとで
 
 const MainMenu: React.FC = (props) => {
-    const propTypes = {
-        selected: propTypes.func,
-    };
+    const [selectedIndex, setSelectedIndex] = React.useState(1);
+    const [inThisComponent, setInThisComponent] = React.useState(false);
+
 
     const handleClick = (num: number) => {
         setSelectedIndex(num);
@@ -28,7 +28,6 @@ const MainMenu: React.FC = (props) => {
                             <MenuItem
                                 key={index}
                                 onClick={event => handleClick(index)}
-                                selected={selectedIndex === index}
                             >
                                 <ListItemIcon>
                                     {IconCheck(item.icon)}

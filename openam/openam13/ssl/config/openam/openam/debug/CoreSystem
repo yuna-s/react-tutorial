@@ -1,0 +1,2 @@
+amMonitoring:12/09/2019 07:02:09:610 AM UTC: Thread[http-nio-8443-exec-8,5,main]: TransactionId[43af64c2-6da0-4771-8b2a-215b1c410143-2]
+ERROR: ConfigMonitoring.configureMonitoring: getMonServiceAttrs returns -1, monitoring disabled
