@@ -27,7 +27,7 @@ const DocsPage = () => {
     const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight)
 
     return (
-        <Container maxWidth="lg" className={classes.container}>
+        <Container maxWidth='xl' className={classes.container}>
             <Grid container spacing={3}>
                 {/* Chart */}
                 {/*xs, md, lg is break point.*/}

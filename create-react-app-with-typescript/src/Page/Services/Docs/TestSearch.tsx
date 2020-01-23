@@ -7,6 +7,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Title from '../../../Component/Frame/Title';
+import Button from '../../../Component/Frame/Button';
 import { mainMenu } from '../../../Constance/Value';
 import { Grid, TextField } from '@material-ui/core';
 
@@ -27,37 +28,90 @@ const useStyles = makeStyles(theme => ({
     root: {
         display: 'flex',
     },
-    seeMore: {
+    formControl: {
+        marginTop: theme.spacing(3),
+    },
+    formLink: {
         marginTop: theme.spacing(3),
     },
 }));
 
+
 export default function TestSearch() {
     const classes = useStyles();
+    const [state, setState] = React.useState({
+        gilad: true,
+        jason: false,
+        antoine: false,
+    });
+
+    const handleChange = (name: string) => (event: React.ChangeEvent<HTMLInputElement>) => {
+        setState({ ...state, [name]: event.target.checked });
+    };
+
+    const { gilad, jason, antoine } = state;
+    const error = [gilad, jason, antoine].filter(v => v).length !== 2;
+
     return (
-        <React.Fragment>
 
-            <div className={classes.root}>
-                <Title>{mainMenu[1].menuName2}</Title>
-                <form className={classes.seeMore} noValidate autoComplete="off">
+        <div className={classes.root}>
 
-                    <Grid container spacing={10} alignItems="flex-end">
-                        <Grid item>
-                            システム名
-                </Grid>
-                        <Grid item>
-                            <TextField id="input-with-icon-grid" label="With a grid" fullWidth />
+            <Title>{mainMenu[1].menuName2}</Title>
+
+            <form noValidate autoComplete="off">
+
+                <Grid container spacing={5}
+                    direction="row"
+                    justify="space-between"
+                    alignItems="flex-end">
+                    <Grid item xs={6} md={6} lg={6}>
+                        システム名
                         </Grid>
+                    <Grid item xs={6} md={6} lg={6}>
+                        <TextField id="input-with-icon-grid" label="英数字/漢字" placeholder="例：Tarte" fullWidth />
                     </Grid>
-                </form>
+                </Grid>
+                <Grid container spacing={5}
+                    direction="row"
+                    justify="space-between"
+                    alignItems="flex-end">
+                    <Grid item xs={6} md={6} lg={6}>
+                        システムコード
+                        </Grid>
+                    <Grid item xs={6} md={6} lg={6}>
+                        <TextField id="input-with-icon-grid" label="半角英数字" placeholder="例：Tarte" fullWidth />
+                    </Grid>
+                </Grid>
+                <Grid container spacing={5}
+                    direction="row"
+                    justify="space-between"
+                    alignItems="flex-end">
+                    <Grid item xs={6} md={6} lg={6}>
+                        システグループコード
+                        </Grid>
+                    <Grid item xs={6} md={6} lg={6}>
+                        <TextField id="input-with-icon-grid" label="半角英数字" placeholder="例：00000" />
+                    </Grid>
+                </Grid>
+                <Grid container spacing={5}
+                    direction="row"
+                    justify="flex-end"
+                    alignItems="flex-end">
+                    <Grid item xs={6} md={6} lg={6}>
+                        <Button label="検索" />
+                    </Grid>
 
-            </div>
-            <div className={classes.seeMore}>
-                <Link color="primary" href="javascript:;">
-                    See more orders
+                </Grid>
+
+
+
+            </form>
+        </div>
+        <div className={classes.formLink}>
+            <Link color="primary" href="javascript:;">
+                See more orders
         </Link>
-            </div>
-        </React.Fragment>
+        </div>
 
     );
 }
