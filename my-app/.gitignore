@@ -1,8 +1,5 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-#zip
-*.zip
-/openam
 # dependencies
 /node_modules
 /.pnp
@@ -13,10 +10,6 @@
 
 # production
 /build
-
-# IDEs and editors
-/.idea
-/.vscode
 
 # misc
 .DS_Store
