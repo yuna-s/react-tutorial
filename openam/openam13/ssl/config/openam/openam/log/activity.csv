@@ -1,2 +1,0 @@
-"_id","timestamp","eventName","transactionId","userId","trackingIds","runAs","objectId","operation","before","after","changedFields","revision","component","realm"
-"43af64c2-6da0-4771-8b2a-215b1c410143-61","2019-12-09T07:02:22.971Z","AM-SESSION-CREATED","43af64c2-6da0-4771-8b2a-215b1c410143-57","id=amadmin,ou=user,dc=openam,dc=forgerock,dc=org","[""3984878e762bde9f01""]","id=dsameuser,ou=user,dc=openam,dc=forgerock,dc=org","3984878e762bde9f01","CREATE",,,,,"Session","/"

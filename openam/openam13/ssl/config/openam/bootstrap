@@ -1,1 +1,0 @@
-ldap://localhost:50389/https%3A%2F%2Flocalhost%3A8443%2Fopenam?user=cn%3Ddsameuser%2Cou%3DDSAME+Users%2Cdc%3Dopenam%2Cdc%3Dforgerock%2Cdc%3Dorg&pwd=AQIC5wM2LY4SfczLlj6134qMTx0nkE5XiFMg&dsbasedn=dc%3Dopenam%2Cdc%3Dforgerock%2Cdc%3Dorg&dsmgr=cn%3DDirectory+Manager&dspwd=AQIC5wM2LY4SfczLlj6134qMTx0nkE5XiFMg&ver=1.0

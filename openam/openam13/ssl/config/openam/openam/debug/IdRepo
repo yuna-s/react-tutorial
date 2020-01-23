@@ -1,4 +1,0 @@
-amSDK:12/09/2019 07:02:04:784 AM UTC: Thread[http-nio-8443-exec-8,5,main]: TransactionId[43af64c2-6da0-4771-8b2a-215b1c410143-2]
-ERROR: JCEEncryption:: Unsupported version: -50
-amSDK:12/09/2019 07:02:04:876 AM UTC: Thread[http-nio-8443-exec-8,5,main]: TransactionId[43af64c2-6da0-4771-8b2a-215b1c410143-2]
-ERROR: JCEEncryption:: Unsupported version: -63
