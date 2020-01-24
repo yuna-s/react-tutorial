@@ -7,9 +7,12 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Title from '../../../Component/Frame/Title';
-import Button from '../../../Component/Frame/Button';
+import Button from '../../../Component/Atom/Button';
 import { mainMenu } from '../../../Constance/Value';
-import { Grid, TextField } from '@material-ui/core';
+import { Grid, TextField, FormControl, FormLabel, FormGroup, FormControlLabel, Checkbox, FormHelperText, InputLabel, Input, Switch, Typography } from '@material-ui/core';
+import { Label } from 'recharts';
+import SwitchOnOff from '../../../Component/Atom/SwitchOnOff';
+import CheckBox from '../../../Component/Atom/CheckBox';
 
 // Generate Order Data
 function createData(id: number, date: string, name: string, shipTo: string, paymentMethod: string, amount: number) {
@@ -29,89 +32,124 @@ const useStyles = makeStyles(theme => ({
         display: 'flex',
     },
     formControl: {
-        marginTop: theme.spacing(3),
+        margin: theme.spacing(1),
     },
     formLink: {
         marginTop: theme.spacing(3),
+    },
+    switchLabelOn: {
+        color: 'Primary.dark',
+    },
+    switchLabelOff: {
+        color: 'Primary.light',
     },
 }));
 
 
 export default function TestSearch() {
     const classes = useStyles();
-    const [state, setState] = React.useState({
-        gilad: true,
-        jason: false,
-        antoine: false,
-    });
-
-    const handleChange = (name: string) => (event: React.ChangeEvent<HTMLInputElement>) => {
-        setState({ ...state, [name]: event.target.checked });
+    var test: String = "削除済み含む";
+    const [chekBoxState, setCheckBoxState] = React.useState(false);
+    const handleChangeCheckBox = () => (event: React.ChangeEvent<HTMLInputElement>, checked: boolean) => {
+        setCheckBoxState(event.target.checked);
     };
-
-    const { gilad, jason, antoine } = state;
-    const error = [gilad, jason, antoine].filter(v => v).length !== 2;
 
     return (
 
-        <div className={classes.root}>
-
+        <React.Fragment>
             <Title>{mainMenu[1].menuName2}</Title>
 
-            <form noValidate autoComplete="off">
+            <div className={classes.root}>
 
-                <Grid container spacing={5}
-                    direction="row"
-                    justify="space-between"
-                    alignItems="flex-end">
-                    <Grid item xs={6} md={6} lg={6}>
-                        システム名
+                <FormControl component="fieldset" className={classes.formControl} fullWidth>
+                    <FormGroup>
+                        <Grid
+                            container
+                            justify="space-between"
+                            alignItems="flex-end"
+                            className={classes.formControl}
+                        >
+                            <Grid item xs={2} md={2} lg={2} >
+                                <FormLabel component="legend">共通社員番号</FormLabel>
+                            </Grid>
+                            <Grid item xs={6} md={6} lg={6}>
+                                <TextField id="input-with-icon-grid" label="半角英数字" placeholder="例：1000000" fullWidth />
+                            </Grid>
+                            <Grid item xs={3} md={3} lg={3} >
+                                <SwitchOnOff labelLeft="部分一致" labelRight="完全一致" />
+                            </Grid>
                         </Grid>
-                    <Grid item xs={6} md={6} lg={6}>
-                        <TextField id="input-with-icon-grid" label="英数字/漢字" placeholder="例：Tarte" fullWidth />
-                    </Grid>
-                </Grid>
-                <Grid container spacing={5}
-                    direction="row"
-                    justify="space-between"
-                    alignItems="flex-end">
-                    <Grid item xs={6} md={6} lg={6}>
-                        システムコード
+                        <Grid
+                            container
+                            justify="space-between"
+                            alignItems="flex-end"
+                            className={classes.formControl}
+                        >
+                            <Grid item xs={2} md={2} lg={2}>
+                                <FormLabel component="legend">氏名</FormLabel>
+                            </Grid>
+                            <Grid item xs={6} md={6} lg={6}>
+                                <TextField id="input-with-icon-grid" label="英字/漢字" placeholder="例：汐留花子" fullWidth />
+                            </Grid>
+                            <Grid item xs={3} md={3} lg={3} >
+                                <SwitchOnOff labelLeft="部分一致" labelRight="完全一致" />
+                            </Grid>
                         </Grid>
-                    <Grid item xs={6} md={6} lg={6}>
-                        <TextField id="input-with-icon-grid" label="半角英数字" placeholder="例：Tarte" fullWidth />
-                    </Grid>
-                </Grid>
-                <Grid container spacing={5}
-                    direction="row"
-                    justify="space-between"
-                    alignItems="flex-end">
-                    <Grid item xs={6} md={6} lg={6}>
-                        システグループコード
+                        <Grid
+                            container
+                            justify="space-between"
+                            alignItems="flex-end"
+                            className={classes.formControl}
+                        >
+                            <Grid item xs={2} md={2} lg={2}>
+                                <FormLabel component="legend">ログインID</FormLabel>
+                            </Grid>
+                            <Grid item xs={6} md={6} lg={6}>
+                                <TextField id="input-with-icon-grid" label="半角英数字" placeholder="例：shiodomen01" fullWidth />
+                            </Grid>
+                            <Grid item xs={3} md={3} lg={3} >
+                                <SwitchOnOff labelLeft="部分一致" labelRight="完全一致" />
+                            </Grid>
                         </Grid>
-                    <Grid item xs={6} md={6} lg={6}>
-                        <TextField id="input-with-icon-grid" label="半角英数字" placeholder="例：00000" />
-                    </Grid>
-                </Grid>
-                <Grid container spacing={5}
-                    direction="row"
-                    justify="flex-end"
-                    alignItems="flex-end">
-                    <Grid item xs={6} md={6} lg={6}>
-                        <Button label="検索" />
-                    </Grid>
+                        <Grid
+                            container
+                            justify="space-between"
+                            alignItems="flex-end"
+                            className={classes.formControl}
+                        >
+                            <Grid item xs={2} md={2} lg={2}>
+                                <FormLabel component="legend">Straight-ID</FormLabel>
+                            </Grid>
+                            <Grid item xs={6} md={6} lg={6}>
+                                <TextField id="input-with-icon-grid" label="半角英数字" placeholder="例：shiodomen01" fullWidth />
+                            </Grid>
+                            <Grid item xs={3} md={3} lg={3} >
+                                <SwitchOnOff labelLeft="部分一致" labelRight="完全一致" />
+                            </Grid>
+                        </Grid>
+                        <Grid
+                            container
+                            justify="flex-start"
+                            alignItems="center"
+                            className={classes.formControl}
+                        >
+                            <Grid item xs={2} md={2} lg={2}>
+                                <CheckBox label={test} state={chekBoxState} />
+                            </Grid>
+                            <Grid item xs={10} md={10} lg={10}>
+                                <Button label="検索" />
+                            </Grid>
+                        </Grid>
+                    </FormGroup>
 
-                </Grid>
+                </FormControl>
 
+            </div>
 
-
-            </form>
-        </div>
-        <div className={classes.formLink}>
             <Link color="primary" href="javascript:;">
                 See more orders
-        </Link>
-        </div>
+            </Link>
+        </React.Fragment>
 
     );
 }

@@ -28,6 +28,7 @@ const drawerWidth = 240;
 const useStyles = makeStyles(theme => ({
     root: {
         display: 'flex',
+        width: "100%"
     },
     drawerPaper: {
         position: 'relative',
@@ -54,6 +55,7 @@ const useStyles = makeStyles(theme => ({
         flexGrow: 1,
         height: '100vh',
         overflow: 'auto',
+        zIndex: 1,
     },
     toolbarIcon: {
         display: 'flex',
@@ -107,12 +109,8 @@ export default function Dashboard() {
             </Drawer>
             <main className={classes.content}>
                 <div className={classes.appBarSpacer} />
-                <Switch>
-                    <Route exact path="/home" component={HomePage} />
-                    <Route exact path="/docs" component={DocsPage} />
-                </Switch>
-                <Copyright />
+                <MainContainer />
             </main>
-        </div>
+        </div >
     );
 }

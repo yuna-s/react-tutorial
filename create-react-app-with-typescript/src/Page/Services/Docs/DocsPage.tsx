@@ -12,6 +12,7 @@ const useStyles = makeStyles(theme => ({
         display: 'flex',
         overflow: 'auto',
         flexDirection: 'column',
+        borderRightWidth: 10,
     },
     container: {
         paddingTop: theme.spacing(4),
@@ -19,7 +20,7 @@ const useStyles = makeStyles(theme => ({
     },
     fixedHeight: {
 
-    }
+    },
 }))
 
 const DocsPage = () => {
@@ -27,13 +28,14 @@ const DocsPage = () => {
     const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight)
 
     return (
-        <Container maxWidth='xl' className={classes.container}>
+        <Container className={classes.container}>
+
             <Grid container spacing={3}>
                 {/* Chart */}
                 {/*xs, md, lg is break point.*/}
                 {/*if break points are not setted,
                  the child containers do not stretch to 100% width of their pearent container.*/}
-                <Grid item xs={12} md={12} lg={12}>
+                <Grid item xs={12} >
                     <Paper className={fixedHeightPaper}>
                         <TestSearch />
                     </Paper>
