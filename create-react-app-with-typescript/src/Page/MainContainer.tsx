@@ -1,21 +1,22 @@
 import React from 'react'
 import { Switch, Route } from 'react-router'
-import { createStyles, makeStyles } from '@material-ui/core'
+import { createStyles, makeStyles } from '@material-ui/core/styles'
 import Copyright from '../Constance/Copyright'
 
 //Routing
 import HomePage from './Services/Home/HomePage'
 import DocsPage from './Services/Docs/DocsPage'
+import theme from '../theme'
 
 
-const useStyles = makeStyles(theme => createStyles({
+const useStyles = makeStyles((theme) => createStyles({
     container: {
         height: "100%",
         width: "100%",
         display: "flex",
-        flexDirection: "column"
+        flexDirection: "column",
     },
-    blank: theme.mixins.toolbar,
+    //blank: theme.mixins.toolbar,
 }))
 
 const MainContainer: React.FC = () => {

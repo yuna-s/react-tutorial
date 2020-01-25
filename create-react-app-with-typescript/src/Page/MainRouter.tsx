@@ -1,6 +1,8 @@
 import React from 'react'
 import { Route, Switch } from 'react-router-dom'
-import { makeStyles, CssBaseline } from '@material-ui/core'
+import { CssBaseline } from '@material-ui/core'
+import { createStyles, makeStyles } from '@material-ui/core/styles'
+
 
 import LogIn from './LogIn'
 import Dashboard from './Dashboard'
@@ -9,14 +11,12 @@ import MainHeader from './MainHeader'
 import HomePage from './Services/Home/HomePage'
 import MainContainer from './MainContainer'
 
-
-
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => createStyles({
     root: {
         display: "flex",
         width: "100%"
     },
-    appBarSpacer: theme.mixins.toolbar,
+    //appBarSpacer: theme.mixins.toolbar,
     content: {
         flexGrow: 1,
         overflow: 'auto',

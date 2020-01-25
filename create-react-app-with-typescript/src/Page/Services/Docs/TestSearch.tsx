@@ -49,8 +49,8 @@ const useStyles = makeStyles(theme => ({
 export default function TestSearch() {
     const classes = useStyles();
     var test: String = "削除済み含む";
-    const [chekBoxState, setCheckBoxState] = React.useState(false);
-    const handleChangeCheckBox = () => (event: React.ChangeEvent<HTMLInputElement>, checked: boolean) => {
+    const [checkBoxState, setCheckBoxState] = React.useState(false);
+    const handleChangeCheckBox = (event: React.ChangeEvent<HTMLInputElement>) => {
         setCheckBoxState(event.target.checked);
     };
 
@@ -134,7 +134,7 @@ export default function TestSearch() {
                             className={classes.formControl}
                         >
                             <Grid item xs={2} md={2} lg={2}>
-                                <CheckBox label={test} state={chekBoxState} />
+                                <CheckBox label={test} onChange={handleChangeCheckBox} state={checkBoxState} />
                             </Grid>
                             <Grid item xs={10} md={10} lg={10}>
                                 <Button label="検索" />

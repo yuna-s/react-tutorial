@@ -4,7 +4,8 @@ import clsx from 'clsx'
 
 import { Container, Grid, Paper, makeStyles } from '@material-ui/core'
 import TestSearch from './TestSearch'
-import Orders from './Orders'
+import Orders from './EnhancedTable'
+import EnhancedTable from './EnhancedTable'
 
 const useStyles = makeStyles(theme => ({
     paper: {
@@ -30,7 +31,7 @@ const DocsPage = () => {
     return (
         <Container className={classes.container}>
 
-            <Grid container spacing={3}>
+            <Grid container spacing={2}>
                 {/* Chart */}
                 {/*xs, md, lg is break point.*/}
                 {/*if break points are not setted,
@@ -38,6 +39,11 @@ const DocsPage = () => {
                 <Grid item xs={12} >
                     <Paper className={fixedHeightPaper}>
                         <TestSearch />
+                    </Paper>
+                </Grid>
+                <Grid item xs={12} >
+                    <Paper className={fixedHeightPaper}>
+                        <EnhancedTable />
                     </Paper>
                 </Grid>
             </Grid>
