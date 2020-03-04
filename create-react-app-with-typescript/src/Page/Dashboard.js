@@ -15,11 +15,8 @@ import SubMenu from './Menu/SubMenu';
 import { TextField } from '@material-ui/core'
 import MainContainer from './MainContainer'
 
-import IconCheck from '../Constance/IconCheck'
-import Copyright from '../Constance/Copyright'
-import MainHeader from './MainHeader'
-import HomePage from './Services/Home/HomePage';
-import DocsPage from './Services/Docs/DocsPage';
+import Icon from "../Constance/Icon";
+import MainHeader from './MainHeader';
 //----------------------------------------------------
 
 
@@ -93,7 +90,7 @@ export default function Dashboard() {
             >
                 <div className={classes.toolbarIcon}>
                     <IconButton onClick={handleDrawerClose}>
-                        {IconCheck("chevronLeft")}
+                        <Icon iconName="chevronLeft" />
                     </IconButton>
                 </div>
                 {/* menu list */}

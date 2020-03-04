@@ -1,17 +1,13 @@
 version: '3'
 
 services:
-    app:
-        container_name: reactapp
-        image: reactapp:latest
+    node:
+        container_name: react-dev
+        image: react-dev:latest
         build:
             context: .
-            args:
-              - NODE_TAG=12.6
-              - NGINX_TAG=alpine
-        environment:
-            - NODE_ENV=production
-
+        volumes:
+            - .:/usr/src/app
+        command: sh -c "npm start"
         ports:
-            - 8081:80
-        restart: always
+            - "3001:3000"

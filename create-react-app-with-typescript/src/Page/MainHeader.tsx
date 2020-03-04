@@ -5,7 +5,8 @@ import { AppBar, Toolbar, Typography, makeStyles, IconButton, Badge } from '@mat
 
 //constanceの読み込み
 import { drawerWidth, title } from '../Constance/Value'
-import IconCheck from '../Constance/IconCheck'
+import Icon from "../Constance/Icon";
+import { NavLink, Link } from 'react-router-dom';
 
 const useStyles = makeStyles(theme => ({
     toolbar: {
@@ -57,16 +58,14 @@ const MainHeader: React.FC<{ open: any, handleDrawerOpen: any }> = ({ handleDraw
                     onClick={handleDrawerOpen}
                     className={clsx(classes.menuButton, open && classes.menuButtonHidden)}
                 >
-                    {IconCheck("menu")}
+                    <Icon iconName="menu" />
                 </IconButton>
-                <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
+                <Typography component={Link} to="/top" variant="h6" color="inherit" noWrap className={classes.title}>
                     {title}
                 </Typography>
-                <IconButton color="inherit">
-                    <Badge badgeContent={4} color="secondary">
-                        {IconCheck("notification")}
-                    </Badge>
-                </IconButton>
+                <Typography >
+                    杉本 優奈
+                </Typography>
             </Toolbar>
         </AppBar>
     );

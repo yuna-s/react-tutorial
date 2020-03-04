@@ -33,6 +33,7 @@ const useStyles = makeStyles(theme => ({
 
 const LogIn: React.FC = () => {
     const classes = useStyles();
+    const title = "Log in";
     return (
         <Container
             className={classes.container}
@@ -44,8 +45,8 @@ const LogIn: React.FC = () => {
                     <LockOutlined />
                 </Avatar>
                 <Typography component="h1" variant="h5">
-                    Sign in
-            </Typography>
+                    {title}
+                </Typography>
                 <form className={classes.form} noValidate>
                     <TextField
                         variant="outlined"
@@ -53,7 +54,7 @@ const LogIn: React.FC = () => {
                         required
                         fullWidth
                         id="email"
-                        label="Email Address"
+                        label="Login-ID"
                         name="email"
                         autoComplete="email"
                         autoFocus
@@ -80,17 +81,17 @@ const LogIn: React.FC = () => {
                         color="primary"
                         className={classes.submit}
                     >
-                        Sign In
+                        Log In
                     </Button>
                     <Grid container>
                         <Grid item xs>
                             <Link href="#" variant="body2">
-                                Forgot password?
+                                Forgot password?OK?
                           </Link>
                         </Grid>
                         <Grid item>
                             <Link href="#" variant="body2">
-                                {"Don't have an account? Sign Up"}
+                                {"Don't have an account? Please applay for an account with Tarte."}
                             </Link>
                         </Grid>
                     </Grid>

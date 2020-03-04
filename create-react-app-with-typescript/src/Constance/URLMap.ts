@@ -1,75 +1,72 @@
-export const MENU_URLS = [
+export const MENU_URLS: URLMapArray = [
     {
         name: "アカウント",
-        URL: "/home",
+        URL: "/accountSearch",
         icon: "account"
     },
     {
-        name: "共有アカウント",
-        URL: "/docs",
-        icon: "sharedAccount"
-
-    },
-    {
         name: "システム権限",
-        URL: "/issue",
-        icon: "authority"
+        URL: "/userPermissons",
+        icon: "userPermissons"
 
     },
     {
         name: "申請書",
-        URL: "/issue",
+        URL: "/applicationSearch",
         icon: "application"
 
     }
 ]
 
-export const SUBMENU_URLS_MASTER = [
+export const SUBMENU_URLS_MASTER: URLMapArray = [
     {
         name: "承認グループ",
-        URL: "/apply",
-        icon: "approval"
+        URL: "/approvalGroupMaster",
+        icon: "approvalGroup"
     },
     {
         name: "申請グループ",
-        URL: "/contact",
-        icon: "authority"
+        URL: "/applicationGroupMaster",
+        icon: "applicationGroup"
     },
     {
         name: "システムグループ",
-        URL: "/apply",
-        icon: "system"
+        URL: "/systemGroupMaster",
+        icon: "systemGroup"
     },
     {
         name: "インフォメーション",
-        URL: "/contact",
+        URL: "/infoMaster",
         icon: "info"
     }
 ]
-export const SUBMENU_URLS_TOOLS = [
+export const SUBMENU_URLS_TOOLS: URLMapArray = [
     {
         name: "STRAIGHT互換認証API",
-        URL: "/apply",
+        URL: "/straightApi",
         icon: "straightApi"
-    },
-    {
-        name: "管理者機能",
-        URL: "/contact",
-        icon: "settingUsers"
     }
 ]
-export const SUBMENU_URLS = [
+export const SUBMENU_URLS: URLMapArray = [
     {
         name: "マスタ",
-        URL: "/apply",
+        URL: "/master",
         icon: "master",
         subsubmenu: SUBMENU_URLS_MASTER
     },
     {
         name: "ツール",
-        URL: "/contact",
+        URL: "/tools",
         icon: "tools",
         subsubmenu: SUBMENU_URLS_TOOLS
 
     }
 ]
+
+interface URLMap {
+    name: string,
+    URL: string,
+    icon: string,
+    subsubmenu?: URLMap[]
+}
+interface URLMapArray extends Array<URLMap> { }

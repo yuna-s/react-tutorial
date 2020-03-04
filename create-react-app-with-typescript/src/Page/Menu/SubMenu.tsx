@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom'
 import { MenuItem, Link, ListItemText, Collapse, makeStyles, Theme, createStyles } from '@material-ui/core'
 import MainRouter from '../MainRouter'
 import ListItemIcon from '@material-ui/core/ListItemIcon';
-import IconCheck from '../../Constance/IconCheck';
+import Icon from "../../Constance/Icon"
 import { ExpandLess, ExpandMore } from '@material-ui/icons';
 
 const SubMenu: React.FC = (props) => {
@@ -39,7 +39,7 @@ const SubMenu: React.FC = (props) => {
                                     selected={selectedIndex === index}
                                 >
                                     <ListItemIcon>
-                                        {IconCheck(item.icon)}
+                                        <Icon iconName={item.icon} />
                                     </ListItemIcon>
                                     <ListItemText primary={item.name} />
                                     {(open && (selectedIndex == index)) ? <ExpandLess /> : <ExpandMore />}
@@ -51,7 +51,7 @@ const SubMenu: React.FC = (props) => {
                                                 <Link component={NavLink} to={subItem.URL}>
                                                     <MenuItem key={subIndex} className={classes.nested}>
                                                         <ListItemIcon>
-                                                            {IconCheck(subItem.icon)}
+                                                            <Icon iconName={subItem.icon} />
                                                         </ListItemIcon>
                                                         {subItem.name}
                                                     </MenuItem>
@@ -71,7 +71,7 @@ const SubMenu: React.FC = (props) => {
                                     selected={selectedIndex === index}
                                 >
                                     <ListItemIcon>
-                                        {IconCheck(item.icon)}
+                                        <Icon iconName={item.icon} />
                                     </ListItemIcon>
                                     <ListItemText primary={item.name} />
                                 </MenuItem>

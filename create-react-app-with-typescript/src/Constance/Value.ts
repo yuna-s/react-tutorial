@@ -1,5 +1,5 @@
 export const drawerWidth = 240;
-export const title = "管理者機能ポータル";
+export const title = "アカウント管理";
 export const mainMenu = [
   {
     memuName: "アカウント",

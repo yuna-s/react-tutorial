@@ -1,11 +1,11 @@
 import React from 'react'
-import { Button } from '@material-ui/core'
 import clsx from 'clsx'
+import { mainMenu } from '../../../Constance/Value';
+import Title from '../../../Component/Frame/Title';
 
 import { Container, Grid, Paper, makeStyles } from '@material-ui/core'
-import TestSearch from './TestSearch'
-import Orders from './EnhancedTable'
-import EnhancedTable from './EnhancedTable'
+import SearchParamsForm from './SearchParamsForm'
+import SearchResultTable from './SearchResultTable'
 
 const useStyles = makeStyles(theme => ({
     paper: {
@@ -24,26 +24,28 @@ const useStyles = makeStyles(theme => ({
     },
 }))
 
-const DocsPage = () => {
+/**
+ * アカウント検索画面を提供する
+ * 画面の大枠は、ここで定義される
+ */
+const AccountSearchPage = () => {
     const classes = useStyles();
     const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight)
 
     return (
         <Container className={classes.container}>
-
             <Grid container spacing={2}>
-                {/* Chart */}
-                {/*xs, md, lg is break point.*/}
-                {/*if break points are not setted,
-                 the child containers do not stretch to 100% width of their pearent container.*/}
                 <Grid item xs={12} >
+                    <Title>{mainMenu[0].menuName2}</Title>
                     <Paper className={fixedHeightPaper}>
-                        <TestSearch />
+                        <Title>検索条件</Title>
+                        <SearchParamsForm />
                     </Paper>
                 </Grid>
                 <Grid item xs={12} >
                     <Paper className={fixedHeightPaper}>
-                        <EnhancedTable />
+                        <Title>検索結果</Title>
+                        <SearchResultTable />
                     </Paper>
                 </Grid>
             </Grid>
@@ -51,4 +53,4 @@ const DocsPage = () => {
     )
 }
 
-export default DocsPage
+export default AccountSearchPage

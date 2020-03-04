@@ -4,9 +4,10 @@ import { createStyles, makeStyles } from '@material-ui/core/styles'
 import Copyright from '../Constance/Copyright'
 
 //Routing
-import HomePage from './Services/Home/HomePage'
-import DocsPage from './Services/Docs/DocsPage'
+import AccountSearchPage from './Services/Search/AccountSearchPage'
+import TopPage from './Services/Top/TopPage'
 import theme from '../theme'
+import AccountDetailPage from './Services/AccountDetail/AccountDetailPage'
 
 
 const useStyles = makeStyles((theme) => createStyles({
@@ -24,8 +25,9 @@ const MainContainer: React.FC = () => {
     return (
         <div className={classes.container}>
             <Switch>
-                <Route path="/docs" component={DocsPage} />
-                <Route path="/home" component={HomePage} />
+                <Route path="/accountSearch" component={AccountSearchPage} />
+                <Route path="/sharedAccountDetail" component={AccountDetailPage} />
+                <Route path="/top" component={TopPage} />
             </Switch>
             <Copyright />
         </div>

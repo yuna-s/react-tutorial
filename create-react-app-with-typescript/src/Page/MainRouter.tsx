@@ -6,10 +6,6 @@ import { createStyles, makeStyles } from '@material-ui/core/styles'
 
 import LogIn from './LogIn'
 import Dashboard from './Dashboard'
-import IconCheck from '../Constance/IconCheck'
-import MainHeader from './MainHeader'
-import HomePage from './Services/Home/HomePage'
-import MainContainer from './MainContainer'
 
 const useStyles = makeStyles((theme) => createStyles({
     root: {
@@ -52,7 +48,6 @@ const MainRouter: React.FC = () => {
             */}
             <Switch>
                 <Route exact path="/login" component={LogIn} />
-
                 <Route path="/" component={Dashboard} />
             </Switch>
         </div>

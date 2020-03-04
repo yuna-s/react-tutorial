@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`button should make normal button. 1`] = `ShallowWrapper {}`;

@@ -1,6 +1,4 @@
 import React, { ReactChildren, ComponentProps } from 'react';
-import PropTypes from 'prop-types';
-import Button from '@material-ui/core/Button';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import { Typography, Grid, Switch } from '@material-ui/core';
 
