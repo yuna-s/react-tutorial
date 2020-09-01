@@ -34,23 +34,23 @@ const SubMenu: React.FC = (props) => {
                         return (
                             <>
                                 <MenuItem
-                                    key={index}
+                                    key={`SubMenuMenuItem-No:${index}`}
                                     onClick={event => handleClick(index)}
                                     selected={selectedIndex === index}
                                 >
-                                    <ListItemIcon>
+                                    <ListItemIcon key={`SubMenuListItemIcon-No:${index}`}>
                                         <Icon iconName={item.icon} />
                                     </ListItemIcon>
-                                    <ListItemText primary={item.name} />
+                                    <ListItemText key={`SubMenuListItemText-No:${index}`} primary={item.name} />
                                     {(open && (selectedIndex == index)) ? <ExpandLess /> : <ExpandMore />}
                                 </MenuItem>
-                                <Collapse in={open && (selectedIndex == index)} timeout="auto" unmountOnExit>
+                                <Collapse key={`SubMenuCollapse-No:${index}`} in={open && (selectedIndex == index)} timeout="auto" unmountOnExit>
                                     {
                                         item.subsubmenu.map((subItem, subIndex) => {
                                             return (
-                                                <Link component={NavLink} to={subItem.URL}>
-                                                    <MenuItem key={subIndex} className={classes.nested}>
-                                                        <ListItemIcon>
+                                                <Link key={`SubMenuLink-No:${index}-No:${subIndex}`} component={NavLink} to={subItem.URL}>
+                                                    <MenuItem key={`SubMenuMenuItem-No:${index}-No:${subIndex}`} className={classes.nested}>
+                                                        <ListItemIcon key={`SubMenuListItemIcon-No:${index}-No:${subIndex}`} >
                                                             <Icon iconName={subItem.icon} />
                                                         </ListItemIcon>
                                                         {subItem.name}
@@ -64,19 +64,16 @@ const SubMenu: React.FC = (props) => {
                         )
                     } else {
                         return (
-                            <>
-                                <MenuItem
-                                    key={index}
-                                    onClick={event => handleClick(index)}
-                                    selected={selectedIndex === index}
-                                >
-                                    <ListItemIcon>
-                                        <Icon iconName={item.icon} />
-                                    </ListItemIcon>
-                                    <ListItemText primary={item.name} />
-                                </MenuItem>
-
-                            </>
+                            <MenuItem
+                                key={`SubMenuMenuItem-No:${index}`}
+                                onClick={event => handleClick(index)}
+                                selected={selectedIndex === index}
+                            >
+                                <ListItemIcon>
+                                    <Icon iconName={item.icon} />
+                                </ListItemIcon>
+                                <ListItemText key={`SubMenuListItemText-No:${index}`} primary={item.name} />
+                            </MenuItem>
                         )
                     }
                 })

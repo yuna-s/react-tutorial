@@ -14,7 +14,7 @@ export default function FormButton(props: ButtonProps) {
   const classes = useStyles();
 
   return (
-    <Button variant="contained" color="primary" href="#contained-buttons" size='medium' className={classes.ButtonControl} >
+    <Button type="submit" variant="contained" color="primary" href="#contained-buttons" size='medium' className={classes.ButtonControl} >
       {props.label}
     </ Button>
   );

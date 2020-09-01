@@ -23,9 +23,9 @@ const MainMenu: React.FC = (props) => {
             {
                 MENU_URLS.map((item, index) => {
                     return (
-                        <Link component={NavLink} to={item.URL}>
+                        <Link key={`MainMenuLink-No:${index}`} component={NavLink} to={item.URL}>
                             <MenuItem
-                                key={index}
+                                key={`MainMenuMenuItem-No:${index}`}
                                 onClick={event => handleClick(index)}
                             >
                                 <ListItemIcon>

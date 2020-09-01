@@ -40,7 +40,6 @@ const AccountDetailPage = () => {
           <FormButton label='戻る' />
           <Paper className={fixedHeightPaper}>
             <UserBasicInfo />
-            <SearchForm title='title' />
           </Paper>
         </Grid>
         <Grid item xs={12} >

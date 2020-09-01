@@ -15,38 +15,19 @@ const useStyles = makeStyles(theme => createStyles({
 
 export default function SwitchOnOff(props: SwitchProps) {
   const classes = useStyles();
-
-  const [state, setState] = React.useState({
-    gilad: true,
-    jason: false,
-    antoine: false,
-  });
-  const { gilad, jason, antoine } = state;
-
-  const handleChange = (name: string) => (event: React.ChangeEvent<HTMLInputElement>) => {
-    setState({ ...state, [name]: event.target.checked });
-
-  };
   const checkLabelColor = (switchState: boolean) => {
-    if (switchState) {
-      return classes.switchLabelOn
-    } else {
-      return classes.switchLabelOff
-    }
+    if (switchState) return classes.switchLabelOn
+    else return classes.switchLabelOff
   };
 
   return (
     <Typography component="div">
       <Grid component="label" container alignItems="center" spacing={1}>
-        <Grid item className={checkLabelColor(!state.jason)}>{props.labelLeft}</Grid>
+        <Grid item className={checkLabelColor(!props.state)}>{props.labelLeft}</Grid>
         <Grid item>
-          <Switch
-            checked={state.jason}
-            onChange={handleChange('jason')}
-            value="jason"
-          />
+          <Switch checked={props.state} onChange={props.onChange} value="exact" />
         </Grid>
-        <Grid item className={checkLabelColor(state.jason)}>{props.labelRight}</Grid>
+        <Grid item className={checkLabelColor(props.state)}>{props.labelRight}</Grid>
       </Grid>
     </Typography>
   );
@@ -56,4 +37,6 @@ export default function SwitchOnOff(props: SwitchProps) {
 export interface SwitchProps {
   labelLeft: String,
   labelRight: String,
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void,
+  state: boolean
 };
